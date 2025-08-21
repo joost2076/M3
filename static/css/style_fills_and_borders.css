@@ -1,0 +1,114 @@
+/*https://color.adobe.com/Coney-Island-color-theme-2173697/edit/?copy=true*/
+.coney_island1{ /*gebruikt voor rect_canvas*/
+	fill: rgba(0,0,0,0);
+	stroke-width: 1;
+	stroke: black;
+}
+.coney_island2{
+	fill: #06736c;   /* rgba(6,115,108,1);*/
+	fill-opacity:0.9;
+	stroke-width: 0.5;
+	stroke: black;
+}
+.coney_island3{
+	fill: #a53539;  /*rgba(165,53,57,1);*/
+	fill-opacity:0.9;
+	stroke-width: 0.5;
+	stroke: black;
+}
+.coney_island4{
+	fill: #b9543c; /* rgba(185,84,60,1);*/
+	fill-opacity:0.9;
+	stroke-width: 0.5;
+	stroke: black;
+}
+.coney_island5{
+	fill: rgb(235, 200, 75);  /*#ead075; rgba(234,208,117,1);*/
+	fill-opacity:0.9;
+	stroke-width: 0.5;
+	stroke: black;
+}
+
+.cinnamon_mint1{
+	fill:  #14A697; 
+	fill-opacity:1;
+	stroke-width: 0.5;
+	stroke: rgb(48, 45, 34);
+}
+.cinnamon_mint2{
+	fill: #F2C12E;  
+	fill-opacity:1;
+	stroke-width: 0.5;
+	stroke: rgb(48, 45, 34);
+}
+.cinnamon_mint3{
+	fill: #F29D35;  
+	fill-opacity:1;
+	stroke-width: 0.5;
+	stroke:rgb(48, 45, 34);
+}
+.cinnamon_mint4{
+	fill: #F27649; 
+	fill-opacity:1;
+	stroke-width: 0.5;
+	stroke: rgb(48, 45, 34);
+}
+.cinnamon_mint5{
+	fill:  #F25252;
+	fill-opacity:1;
+	stroke-width: 0.5;
+	stroke: rgb(48, 45, 34);
+}
+.french_girl1{
+	fill:  #58838C;
+	fill-opacity:1;
+	stroke-width: 0.5;
+	stroke: rgb(48, 45, 34);
+}
+.french_girl2{
+	fill: #DAD7C7; 
+	fill-opacity:1;
+	stroke-width: 0.5;
+	stroke: rgb(48, 45, 34);
+}
+.french_girl3{
+	fill: #BF996B; 
+	fill-opacity:1;
+	stroke-width: 0.5;
+	stroke:rgb(48, 45, 34);
+}
+.french_girl4{
+	fill: #BF5841; 
+	fill-opacity:1;
+	stroke-width: 0.5;
+	stroke: rgb(48, 45, 34);
+}
+.french_girl5{
+	fill:  #A61C1C;
+	fill-opacity:1;
+	stroke-width: 0.5;
+	stroke: rgb(48, 45, 34);
+}
+
+.font1{
+	font-size: 48px ;
+}
+.font2{
+	font-size: 32px ;
+}
+.font3{
+	font-size: 24px ;
+}
+.font4{
+	font-size: 18px ;
+}
+.font5{
+	font-size: 12px ;
+}
+
+.text_path_background{
+	stroke: white;
+	stroke-opacity: 1;
+	fill: none;
+	padding:0
+}

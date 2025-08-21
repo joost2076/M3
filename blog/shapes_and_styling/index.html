@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <base href="/M3">
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  <meta name="keywords" content="">
+  <meta name="description" content="">
+
+
+        <title>
+         Breakdown Notes
+        </title>
+
+        <link rel="shortcut icon" href=static/favicon.ico type="image/x-icon" />
+        <link rel="icon" href=static/favicon.ico type="image/x-icon" />
+
+
+        <link href=static/css/font-awesome.min.css rel='stylesheet'></link>
+        <link href=static/css/intro.css?blah=176 rel='stylesheet'></link>
+
+        <!-- Begin Cookie Consent plugin by Silktide - http://silktide.com/cookieconsent
+        <script type="text/javascript">
+            window.cookieconsent_options = {"message":"This website uses cookies to ensure you get the best experience","dismiss":"Got it!","learnMore":"More info","link":null,"theme":"dark-bottom"};
+        </script>
+        <script type="text/javascript" src="cdnjs.cloudflare.com/ajax/libs/cookieconsent2/1.0.9/cookieconsent.min.js"></script>
+        End Cookie Consent plugin -->
+
+        <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+        <link href="https://fonts.googleapis.com/css?family=Zilla+Slab" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Poppins:300" rel="stylesheet">
+    </head>
+<body>
+
+
+
+<div id="menu">
+    <div class="navbar">
+        <a id='map-url'  href="make/new/" target="_blank">
+            <img id=logo-small src="static/img/logo.png" alt="logo"/>
+        </a>
+        <ul>
+            <li class="active"><a class=inner_ref href="#top">HOME</a></li>
+            <li class=hidden><a class='inner_ref' href="#features">FEATURES</a></li>
+            <li><a class=inner_ref href="#show_anchor">EXAMPLES</a></li>
+            <li class=hidden><a class='inner_ref' href="#more">ABOUT</a></li>
+            <li><a class=inner_ref href="about/tutorials/">TUTORIALS</a></li>
+            <li><a class=inner_ref href="make/new/" target="_blank">TO THE MAP!</a></li>
+        </ul>
+    </div>
+
+</div>
+
+
+	<header >
+		<div >
+			<h1>Introducing Shapes and Styles</h1>
+			<a class='button' id=white href="make/new/" target="_blank">Start mapping</a>
+		</div>
+		<!-- <div id=hero>  </div> -->
+	</header>
+
+
+
+
+
+<link href=static/css/blogs.css rel='stylesheet'></link>
+
+
+<style>
+
+
+
+
+	h4{
+		text-align: center;
+	}
+	.blog ul, .blog li{
+		margin-left: 50px;
+		list-style-type: circle;
+	}
+
+	.smaller p{
+		font-size: 16px;
+	}
+
+
+
+</style>
+
+
+<div class='container blog'>
+
+	<div >
+		<h1>Shapes, styles, paragraphs and paths </h1>
+		<p>In this tutorial you will be introduced to the basic elements that are available in Breakdown Notes: shapes, paragraphs and paths.
+			We will show how you can add these to the canvas and also show how you can style them.
+		</p>
+
+
+	</div>
+
+	<div >
+		<h1>Shapes</h1>
+		<div>
+			<h3>Adding and Positioning Shapes</h3>
+			<div class=grid_duo>
+				<div>
+				<p> You can find all the available shapes in the shapes menu. Click it to expand
+					and reveal the shapes. By clicking a shape, you select it.
+					To add a shape, simply double click the canvas.
+				</p><p>
+					You can move shapes to any position once they have been added to the canvas.
+					Either drag them using your mouse, or use the arrow keys on your keyboard.
+				</p>
+				</div>
+				<div > <img src="static/img/blogs/shapes_and_styling/add.gif" class=blog alt="adding shapes" title="click to replay" onclick="this.src=this.src;">  </div>
+
+			</div>
+		</div>
+
+
+		<div>
+			<h3>Resizing and Morphing</h3>
+			<div class=grid_duo>
+				<div>
+					<p>
+						Most shapes can be resized using the resize button: <i style="color:greenyellow;" class="fa fa-arrows-alt fa-1x" ></i>.
+						Another option is resizing with the keyboard:  hold control and press an arrow key
+						(up and down for changing the height, left and right for the width).
+					</p>
+					<p>
+						Some shapes, like arrows, also have a morph button. With this button you can morph the form of the shape.
+						The morph button looks like this <i style="color:red;" class="fa fa-arrows-alt fa-1x" ></i>. The arrows are indicative of the direction
+						you can move your mouse to morph the shape.
+					</p>
+					<p>
+						There is also a button to extend the line shape: <i style="color:greenyellow;" class="fa fa-angle-double-down fa-2x" ></i>.  The line will extend
+						in the direction you drag the button. Release the button to finalize the new line segment.
+					</p>
+				</div>
+
+				<div > <img src="static/img/blogs/shapes_and_styling/gui_buttons.gif" class=blog alt="resizing and morping shapes" title="click to replay" onclick="this.src=this.src;">  </div>
+			</div>
+		</div>
+	</div>
+
+	<div >
+		<h1>Paragraphs</h1>
+
+		<div>
+			<h3>Adding paragraphs</h3>
+			<div class=grid_duo>
+				<div>
+					<p>
+					All of the shapes, except for the icon and line segment, can contain paragraphs. You add paragraphs by clicking a shape and starting to type.
+					Pressing enter from within a paragraph will also add a new paragraph.
+					</p>
+					<p>
+					You can also add paragraphs and shapes to the canvas in one go. Simply click the canvas and start typing. This will capture the
+					text you type in a new shape.
+
+					Press tab from within a paragraph and continue typing to add another shape with a paragraph just below the shape you just typed in.
+
+					</p>
+					<p>
+					Of course you can always add, change or delete text in an already existing paragraph..
+					To remove a paragraph from a shape, select the paragraph, hold down shift, and press delete or backspace.
+					</p>
+
+				</div>
+				<div > <img src="static/img/blogs/shapes_and_styling/pars.gif" class='blog' alt='paragraph displayed' title="click to replay" onclick="this.src=this.src;">  </div>
+			</div>
+		</div>
+
+		<div>
+			<h3>Moving paragraphs</h3>
+			<div class=grid_duo>
+				<div>
+					<p>
+					Paragraphs can be moved inside a shape by dragging the <i class="fa fa-arrows-alt fa-1x" ></i> button.
+					Paragraphs can also be moved by holding control and pressing an arrow key.
+					Lastly, you can set this (or reset this if you messed up) in the shapes control menu.
+					</p>
+					<p>
+					To reorder paragraph, that is move a paragraph below or above another in the same shape, first select the paragraph you want to reorder and then
+					press shift and the up key or shift and down.
+					</p>
+				</div>
+				<div > <img src="static/img/blogs/shapes_and_styling/mov_pars.gif" class='blog' alt='paragraph displayed' title="click to replay" onclick="this.src=this.src;">  </div>
+			</div>
+		</div>
+	</div>
+
+
+
+	<div>
+		<h1>Connect Shapes with Paths</h1>
+		<div>
+			<h3>Adding Paths</h3>
+			<div class=grid_duo>
+				<div>
+					<p>
+						Most of the shapes can be connected with paths.
+						You can connect shapes with a path by dragging the connect button from one shape onto another.
+						A shape will turn blue once you hover it if you can connect a path to it.
+						Once connected, moving any of the shapes will automatically update the path.
+					</p>
+					<p>
+						A path does not have to connect two shapes. You can also just drag and release the connect button onto the canvas.
+						Dragging the loose end onto a shape in a later stadium, will connect the path to the shape.
+					</p>
+				</div>
+				<div > <img src="static/img/blogs/shapes_and_styling/paths.gif" class='blog' alt='paragraph displayed' title="click to replay" onclick="this.src=this.src;">  </div>
+			</div>
+		</div>
+		<div>
+			<h3>Path flow  </h3>
+			<div class=grid_duo>
+				<div>
+					<p>
+						There are different flows (staight line, with 90 degree corners, flowing) available.
+						These are all accessible from the path menu or context menu. You can open the context menu by right clicking a shape.
+					</p><p>
+						You can also alter the flow of paths yourself. Just double click,the path:
+						control points will show up. By dragging these control points, you can change the path to your liking.
+						In the context menu you will also find buttons to control to which side of a shape a path flows.
+					</p>
+				</div>
+				<div > <img src="static/img/blogs/shapes_and_styling/path_flow.gif" class='blog' alt='paragraph displayed' title="click to replay" onclick="this.src=this.src;">  </div>
+			</div>
+		</div>
+
+		<div>
+			<h3>text on paths</h3>
+			<div class=grid_duo>
+				<div>
+					<p>
+						Paths can have text added to them. To add text, just click the path and start typing: a text should appear on the path.
+						You can add as many texts to a path as you wish.
+					</p><p>
+						You can position text along a path by holding and dragging it.
+					</p>
+				</div>
+				<div > <img src="static/img/blogs/shapes_and_styling/text_on_path.gif" class='blog' alt='paragraph displayed' title="click to replay" onclick="this.src=this.src;">  </div>
+
+			</div>
+		</div>
+
+	</div>
+
+	<div>
+		<h1>Quick styles</h1>
+		<p> Breakdown Notes has an easy way to add styles to shapes, paragraphs or path by one click only: by using quick styles </p>
+		<div>
+			<h3>Using quick styles</h3>
+			<div class=grid_duo>
+				<div>
+					<p>
+						The easiest way to style shapes, paragraph or paths, is by using the quick styles.
+						You can find these in the color menu. By pressing any of the quick styles, you
+						will change the shape on the canvas that is active to the quick style.
+					</p>
+					<p>
+						Every quick style not just has a colors (for the fill, text, border) associated with it, but also a font size, a font family, a border width and some other
+						style attributes. Assigning a quick style to a shape, paragraph or text will copy the relevant styles onto the shape.
+					</p>
+					<p>
+						If you last clicked the canvas (you can check this if there is a green dot on the canvas), you can set the
+						default quick style for any shape you add to the canvas: just click the quick style you want as default
+
+					</p>
+
+
+				</div>
+				<div > <img src="static/img/blogs/shapes_and_styling/quick_styling.gif" class='blog' alt='paragraph displayed' title="click to replay" onclick="this.src=this.src;">  </div>
+			</div>
+
+		</div>
+		<div>
+			<h3>Changing the quick styles</h3>
+			<div class=grid_duo>
+				<div>
+					<p>
+						It is possible to change the a particular quick style. To do so, right click the style you want to change. This will show a pop up
+						with all the style attributes you can change. In the "color picker" there is the possibility to change the color for text, border and fill  </p>
+					</p>
+					<p>
+						Changing the quick styles will also restyle all of the shapes paragraphs and paths on the map that already belong to the
+						quick style you just changed.
+					</p>
+				</div>
+				<div > <img src="static/img/blogs/shapes_and_styling/predef_change.gif" class='blog' alt='paragraph displayed' title="click to replay" onclick="this.src=this.src;">  </div>
+			</div>
+		</div>
+
+	</div>
+
+
+	<div>
+		<h1>Custom styles</h1>
+		<p>
+			There is no need to use quick styles if you do not want to. You can always choose any color, font, margin, etc for any shape, path or paragraph.
+			Here's how:
+		</p>
+
+		<div>
+
+
+			<h3>Colors</h3>
+			<div class=grid_duo>
+				<div>
+					<p>
+						Choosing a custom color for a shape by using the color picker. Clicking the color picker
+						will open up a whole rainbow of colors you can set for the text, fill and border of a shape.
+					</p>
+
+					<p>
+						Paragraphs do not have a border or a fill when they are added to a shape. They are transparent, so they take on
+						the color of the shape they are in. You can however change the colors for a paragraph just like you can with a shape.
+						Assigning a text colors to a paragraph will overrule the text color of the shape.
+					</p>
+
+				</div>
+				<div > <img src="static/img/blogs/shapes_and_styling/custom_color.gif" class='blog' alt='paragraph displayed' title="click to replay" onclick="this.src=this.src;">  </div>
+			</div>
+
+
+
+
+
+			<h3>Fonts</h3>
+			<div class=grid_duo>
+				<div>
+					<p>
+						To help you choose a size quickly, there are five predefined font sizes:
+						XL, X, R, S, XS (extra large, large ,regular ,small ,extra small).
+						You can also choose a specific font size. Check out <span class='leg leg-1'>Fonts</span>
+					</p>
+					<p>
+						Each shape has a font size and font family. These will be the default for all the paragraphs you add to that shape.
+						Just click the font you want to assign to the shape from the font menu or the context menu.
+
+
+					</p>
+					<p>
+						You can always overrule one or more paragraphs by giving those paragraphs
+						their own specific font family or sizes.
+						And for paragraphs there are options for italic and bold, as well as different bullet points
+					</p>
+
+				</div>
+				<div > <img src="static/img/blogs/shapes_and_styling/default_fonts.gif" class='blog' alt='paragraph displayed' title="click to replay" onclick="this.src=this.src;">  </div>
+			</div>
+
+
+			<h3>Borders</h3>
+			<div class=grid_duo>
+				<div>
+					<p>
+						Every shape and paragraph can have a border. You can set the width of the border, and the color.
+						For shapes, there are options to only set the border on one or more sides of a shape.
+						And you may also use dots-n-dashes to make borderd dotted. Controls for borders can be found in the border menu.
+
+					</p>
+
+					<p>
+						You can use the border menu on paths to change the width and add dots/dashes to it.
+						For path with a style of double, which has an inner and an outer style, most options are available for
+						the inner path and the outer path making it possible to get some creative path styles.
+					</p>
+
+				</div>
+				<div > <img src="../static/img/blogs/shapes_and_styling/borders.gif" class='blog' alt='styling borders' title="click to replay" onclick="this.src=this.src;">  </div>
+			</div>
+
+		</div>
+	</div>
+
+	<div>
+		<h1>Styling part of a paragraph</h1>
+		<p>
+			Sometimes you want to highlight only part of a paragraph: for instance, make it bold, italic, or
+			give part of the paragraph a different font, size or color. You can do this too with Breakdown Notes.
+		</p>
+		<div class=grid_duo>
+
+			<div >
+				<p>
+				Simply select the part of the paragraph you want to style (by dragging or clicking a word).
+				Then click the style you want to add to the selected text. This can be a quick style, a font or font size, bold or italic.
+
+				This will add the selected text to a tag with styles that are different from the paragraph.
+				You can still change the text in the tag, and you can add multiple of these tags to one paragraph.
+
+				</p><p>
+				Once you have tagged part of a paragraph, you will not have to select the whole text again to add some more style.
+				After the first tag, the text part becomes selectable, just like a paragraph:
+				just click the part to select it and then you are ready to add more styles (different font, color, border etc.).
+				</p>
+			</div>
+			<div > <img src="../static/img/blogs/shapes_and_styling/chunks.gif" class='blog' alt='styling parts of paragraphs' title="click to replay" onclick="this.src=this.src;"> </div>
+		</div>
+	</div>
+	<div>
+		<h1>Copying styles and shapes</h1>
+		<h3>copying shapes</h3>
+		<div class=grid_duo>
+			<div>
+				<p>
+					With Breakdown Notes you can simply copy shapes if you styled a shape you want to copy.
+					Simply press control c and the active shape will be copied. Next, click the canvas to add it.
+					Instead of control c, there is also a button to copy the shape in the contextmenu.
+				</p>
+				<h3>copying styles</h3>
+				<p>If you already made a shape, but want to have styles of a second shape copied to it, use control s.
+					First click the shape with the styles you want to copy, then press control s, and then click
+					the shape you want the styles copied to.
+					Copying styles also works between paths and between pargraphs.
+				</p>
+			</div>
+			<div > <img src="../static/img/blogs/shapes_and_styling/copying_styles.gif" class='blog' alt='copying styles' title="click to replay" onclick="this.src=this.src;">  </div>
+		</div>
+	</div>
+
+
+    <div >
+
+    </div>
+
+
+
+</div>
+
+
+    <div class="copyright">
+        <p>&copy; 2016-2019 - Breakdown-notes - All Rights Reserved  -
+            <a target=_blank href="about/tos/">Terms of service</a>  -
+            <a target=_blank href="about/privacy-policy/">Privacy</a> -
+            <a target=_blank href="about/about/">Contact</a>
+        </p>
+    </div>
+
+</div>
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery.min.js" ></script>
+    <script>
+    $('.navbar li > a.inner_ref').on('click', function(e){
+        if (location.pathname.includes('/blog/') ||
+        location.pathname.includes('/about/')  ){
+            e.preventDefault();
+            location.href = location.origin + '/' + this.getAttribute('href');
+        }
+    });
+    </script>
+
+  </body>
+</html>

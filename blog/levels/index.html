@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+                <base href="/M3">
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  <meta name="keywords" content="">
+  <meta name="description" content="">
+
+
+        <title>
+         Breakdown Notes
+        </title>
+
+        <link rel="shortcut icon" href=static/favicon.ico type="image/x-icon" />
+        <link rel="icon" href=static/favicon.ico type="image/x-icon" />
+
+
+        <link href=static/css/font-awesome.min.css rel='stylesheet'></link>
+        <link href=static/css/intro.css?blah=176 rel='stylesheet'></link>
+
+        <!-- Begin Cookie Consent plugin by Silktide - http://silktide.com/cookieconsent
+        <script type="text/javascript">
+            window.cookieconsent_options = {"message":"This website uses cookies to ensure you get the best experience","dismiss":"Got it!","learnMore":"More info","link":null,"theme":"dark-bottom"};
+        </script>
+        <script type="text/javascript" src="cdnjs.cloudflare.com/ajax/libs/cookieconsent2/1.0.9/cookieconsent.min.js"></script>
+        End Cookie Consent plugin -->
+
+        <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+        <link href="https://fonts.googleapis.com/css?family=Zilla+Slab" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Poppins:300" rel="stylesheet">
+    </head>
+<body>
+
+
+
+<div id="menu">
+    <div class="navbar">
+        <a id='map-url'  href="make/new/" target="_blank">
+            <img id=logo-small src="static/img/logo.png" alt="logo"/>
+        </a>
+        <ul>
+            <li class="active"><a class=inner_ref href="#top">HOME</a></li>
+            <li class=hidden><a class='inner_ref' href="#features">FEATURES</a></li>
+            <li><a class=inner_ref href="#show_anchor">EXAMPLES</a></li>
+            <li class=hidden><a class='inner_ref' href="#more">ABOUT</a></li>
+            <li><a class=inner_ref href="about/tutorials/">TUTORIALS</a></li>
+            <li><a class=inner_ref href="make/new/" target="_blank">TO THE MAP!</a></li>
+        </ul>
+    </div>
+
+</div>
+
+
+
+<header class=grid_intro>
+    <div>
+        <h1>Levels</h1>
+        <h2 class=white_text>A feature to scale shapes and text bases on the zoom level</h2>
+        <a class='button' id=white href="make/new/" target="_blank">Start mapping</a>
+    </div>
+    <!-- <div id=hero>  </div> -->
+</header>
+
+
+
+
+
+
+<link href=static/css/blogs.css rel='stylesheet'></link>
+
+
+<style>
+
+    #hero{
+        background: url(static/img/periodic_table_drawn.png) no-repeat;
+        background-size: contain;
+        min-height:400px;
+        margin-top:20px;
+        margin-bottom:22px;
+    }
+
+	h4{
+		text-align: center;
+	}
+	.blog ul, .blog li{
+		margin-left: 50px;
+		list-style-type: circle;
+	}
+
+	.smaller p{
+		font-size: 16px;
+	}
+	.copyright{
+    	margin-top:24px;
+    	background-color: #734b6d;
+	}
+	.copyright a{
+		color:white;
+	}
+
+</style>
+
+<div class='container blog'>
+
+
+    <div >
+		<h1>Using different levels</h1>
+
+        <p>
+            Breakdown Notes offers the possibility to zoom in or zoom out of your maps for better overview or more detail.
+            A downside of zooming is that shapes and text might look overly big or way to small.
+        </p>
+        <p>
+            With levels, the size of shapes and text is adjusted for the zoom-level you are working on at that moment.
+            If you are zoomed out, shapes and text are scaled up, and vice versa.
+
+        </p>
+
+
+
+    </div>
+
+
+    <div>
+        <h1>How?</h1>
+        <div class=grid_duo>
+
+            <div>
+                <p>Levels are on by default. In the levels menu, you will find a button to turn levels off. This will not undo the scaling
+                    of the shapes you might have added upto that point. Likewise, turning it on again, will not scale any existing shapes.
+                </p>
+
+                <p>Once you zoom in or out of the map far enough you will notice a message in the top left side of the screen that shows
+                    message "L0" to "L3", That is an indicator for the zoom level you just entered. L0 is the level with the most overview, L3 has the most detail.
+
+                </p>
+            </div>
+            <div > <img src="static/img/blogs/levels/levels.gif" class='blog'title="click to replay" onclick="this.src=this.src;">  </div>
+        </div>
+    </div>
+    <div>
+        <h1>Change level of a shape</h1>
+
+        <div>
+
+
+            <p>You can manually use the L0 to L4 buttons in the "levels menu"to change the scaling of a shape
+                (or use the hotkeys shift + alt + [1,2,3,4]). The size of the shape will be adjusted immediately.
+            </p>
+
+
+            <p>Of course you can still alter any attribute of the shape (width, height, font size, border width etc), no matter its level.
+                And you might be interested to know that levels is also an attribute you can group shapes on (see <a>grouping and merging</a>)
+            </p>
+
+        </div>
+
+        <h1>What gets scaled</h1>
+        <div>
+            <p> You might want to know what gets scaled. Read on to find out. </p>
+
+            <p><b>Font size</b>: On every level, the font sizes XL, X R S and XS take on a different pixel size</p>
+            <p><b>Border width</b>: Also, the border width will be diffrent </p>
+            <p><b>Size of shape</b>: Shapes you add by  </p>
+            <p><b>path thickness</b>: Thickness of the path will be based on the lowest level of the shapes you connected  </p>
+
+        </div>
+
+    </div>
+
+
+</div>
+
+
+    <div class="copyright">
+        <p>&copy; 2016-2019 - Breakdown-notes - All Rights Reserved  -
+            <a target=_blank href="about/tos/">Terms of service</a>  -
+            <a target=_blank href="about/privacy-policy/">Privacy</a> -
+            <a target=_blank href="about/about/">Contact</a>
+        </p>
+    </div>
+
+</div>
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery.min.js" ></script>
+    <script>
+    $('.navbar li > a.inner_ref').on('click', function(e){
+        if (location.pathname.includes('/blog/') ||
+        location.pathname.includes('/about/')  ){
+            e.preventDefault();
+            location.href = location.origin + '/' + this.getAttribute('href');
+        }
+    });
+    </script>
+
+  </body>
+</html>

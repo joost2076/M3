@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <base href="/M3">
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  <meta name="keywords" content="">
+  <meta name="description" content="">
+
+
+        <title>
+         Breakdown Notes
+        </title>
+
+        <link rel="shortcut icon" href=static/favicon.ico type="image/x-icon" />
+        <link rel="icon" href=static/favicon.ico type="image/x-icon" />
+
+
+        <link href=static/css/font-awesome.min.css rel='stylesheet'></link>
+        <link href=static/css/intro.css?blah=176 rel='stylesheet'></link>
+
+        <!-- Begin Cookie Consent plugin by Silktide - http://silktide.com/cookieconsent
+        <script type="text/javascript">
+            window.cookieconsent_options = {"message":"This website uses cookies to ensure you get the best experience","dismiss":"Got it!","learnMore":"More info","link":null,"theme":"dark-bottom"};
+        </script>
+        <script type="text/javascript" src="cdnjs.cloudflare.com/ajax/libs/cookieconsent2/1.0.9/cookieconsent.min.js"></script>
+        End Cookie Consent plugin -->
+
+        <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+        <link href="https://fonts.googleapis.com/css?family=Zilla+Slab" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Poppins:300" rel="stylesheet">
+    </head>
+<body>
+
+
+
+<div id="menu">
+    <div class="navbar">
+        <a id='map-url'  href="make/new/" target="_blank">
+            <img id=logo-small src="static/img/logo.png" alt="logo"/>
+        </a>
+        <ul>
+            <li class="active"><a class=inner_ref href="#top">HOME</a></li>
+            <li class=hidden><a class='inner_ref' href="#features">FEATURES</a></li>
+            <li><a class=inner_ref href="#show_anchor">EXAMPLES</a></li>
+            <li class=hidden><a class='inner_ref' href="#more">ABOUT</a></li>
+            <li><a class=inner_ref href="about/tutorials/">TUTORIALS</a></li>
+            <li><a class=inner_ref href="make/new/" target="_blank">TO THE MAP!</a></li>
+        </ul>
+    </div>
+
+</div>
+
+
+<header class=grid_intro>
+    <div >
+        <h1>Adding Mathematical expressions to your notes </h1>
+        <a class='button' id=white href="make/new/" target="_blank">Start mapping</a>
+    </div>
+    <a id=hero2 href="make/load/gravity/">  </a>
+
+</header>
+
+
+<link href=static/css/blogs.css rel='stylesheet'></link>
+
+<style>
+    h5{
+        margin-bottom:0;
+        margin-top:24px;
+        font-size:16px;
+        text-decoration:underline;
+    }
+    p{margin-top:0}
+
+
+    .grid_duo{
+        grid-column-gap:24px;
+    }
+
+    #hero2{
+        background: url(static/img/blogs/tex/gravity.png) no-repeat;
+        background-size: cover;
+
+        min-height:375px;
+        margin-top:20px;
+        margin-bottom:22px;
+        box-shadow: 11px 8px 14px 4px #2e0c42;
+    }
+
+    .code_example{
+        display:flex;
+        justify-content: space-between;
+        align-items:center;
+        font-size:16px;
+
+    }
+    .code_examples > img{
+        max-width:100px;
+    }
+
+</style>
+
+
+<!-- <script>
+    document.querySelector('#hero').onclick = function(e){
+        window.open(location.origin + "\make\load\gravity", '_blank');
+    }
+
+</script> -->
+
+<div class='container blog'>
+	<div>
+		<h1>  </h1>
+        <p style="font-size:22px">
+            Do you need to add some precise mathematical expressions to your notes ?
+            Or do you want to explain with words and arrows some complex formula, and then export it to embed in
+            your essay or report ?
+            <br>
+            Then keep reading. Because Breakdown Notes makes it rather simple to
+            add formula's with for instance greek letters, integrals or summations to your map and position these anywhere between the regular text, images
+            and arrows.
+
+        </p>
+    </div>
+
+    <div >
+
+    </div>
+
+    <div>
+		<h1>Tex notation </h1>
+        <p>
+            To write a mathematical expression, you will need to learn some Tex. Tex is a special notation which allows you to express
+            math operators and symbols. And you will need to know how to add an expression with tex to the map.
+        </p>
+
+
+        <h3>Some basic examples</h3>
+        <div>
+            <div class=grid_duo>
+                <div>
+                    <h5>Simple expression</h5>
+                    <p>
+                        To write a simple expression, like <code>x + 2y</code>, you do not need to use any special notation.
+                        This works for all numbers and variables consisting of characters from the latin alphabet.
+                        Just add a math shape to the map, double click it to open the input menu and type in the expression.
+                    </p>
+
+                </div>
+                <div > <img src="static/img/blogs/tex/add_mj.gif" class=blog alt="adding math" title="click to replay" onclick="this.src=this.src;">  </div>
+            </div>
+
+
+            <h5>Tex symbols</h5>
+            <div class=grid_duo>
+                <div>
+
+                    <p>
+                        If you want to use a character that is not in the latin alphabet, like a greek letter delta or the "logical and"
+                        , you will need a keyword to describe the sign. The keywords needs to be preceded with a \ to signify that it
+                        is a tex expression.
+
+                        Some of the keywords you might guess, like \alpha, \beta etc. But to help out, Breakdown Notes has a menu from
+                        which you can simply click the desired character.
+
+                    </p>
+
+                </div>
+                <div > <img src="static/img/blogs/tex/menu_simple.gif" class=blog alt="adding math" title="click to replay" onclick="this.src=this.src;">  </div>
+            </div>
+
+
+            <h5>Tex symbols that wrap something</h5>
+            <div class=grid_duo>
+                <div>
+
+                    <p>
+                        There are also Tex expression that cannot exist on their own. They need to be followed by some other expression,
+                        variable or constant. For example a square root.
+                        It is expressed as <code>\sqrt x</code>. In these cases, an error might occur if you
+                        only type \sqrt without anything after it.
+
+                         <br>
+
+                        What if you want more then just one letter or number say the square root of (x+2)? To wrap x+2 under
+                        the square root, you must use brackets {}. (where you would normally use () in your expression). Anything inside the brackets after the sqrt will
+                        be wrapped inside the sqrt. The brackets will not show up in the final output.
+
+                        <br>
+                    </p>
+                </div>
+                <div > <img src="static/img/blogs/tex/mj_wrap.gif" class=blog alt="adding math" title="click to replay" onclick="this.src=this.src;">  </div>
+            </div>
+
+
+            <h5>Tex symbols that wrap multiple items</h5>
+            <div class=grid_duo>
+                <div>
+                    <p>
+                        Plenty of tex symbols need multiple other expressions, variables or constants. For instance a fraction.
+
+                        A fraction is written as <code>\frac x y</code>. The first character after \frac will be the numerator, the second will be the
+                        denominator.  To put more on the denominator use <code>\frac {x+2} {y-1}</code>.
+                        An error will appear if the tex parser cannot find two expressions.
+
+                    </p>
+                </div>
+                <div > <img src="static/img/blogs/tex/mj_wrap_mult.gif" class=blog alt="adding math" title="click to replay" onclick="this.src=this.src;">  </div>
+            </div>
+
+            <h5>Superscript and subscript</h5>
+            <div class=grid_duo>
+                <div>
+                    <p><span>with variables</span>
+                        Lots of variables need superscript or substript.
+                        You can use _ (underscore) and ^ ( caret) after a letter, number or tex expression.
+                        For instance, to write the power of something:  <code>2^{x+1}  </code>, and
+                        to write a Xi use <code>x_i  </code>
+                        <br>
+                        <span>Together with another tex expression</span>
+                        You can also use the sub- and superscript after certain tex expression, like an integral sign or Sigma.
+                        It will then form part with the expression.
+                    </p>
+
+                </div>
+                <div >
+                    <p class=code_example><span> superscript </span>  <code> x^{2\lambda}  </code>  <img src="static/img/blogs/tex/tex1.png">   </p>
+                    <p class=code_example><span> subscript </span><code> y_1 + y_2 </code>  <img src="static/img/blogs/tex/tex2.png">   </p>
+                    <p class=code_example><span>both  </span><code> _a^b + \int_a_b </code>  <img src="static/img/blogs/tex/tex3.png"> </p>
+                </div>
+            </div>
+
+            <h5>Some special expression  </h5>
+            <div class=grid_duo>
+                <div>
+
+
+                    <p>
+
+                        As you might have notices, regular text inside tex expressions are written in italics. To write
+                        text plain, you can wrap it with \mathrm{}
+                        <br>
+                        When writing tex, you might also notice that spaces/whitespaces disappear. To force tex to use whitespace, you can
+                        write  one of <code>  \, \: \; \quad </code> which each add some amount of whitescape. They are listed here in increasing order.
+                        <br>
+                        If you want to wrap your expression between brackets, you should denote the brackets with \left and \right.
+                        Tex will then choose a scale that fits the expression inside the brackets.
+                    </p>
+
+                </div>
+                <div >
+
+                    <p class=code_example><span>non italic text </span>   <code>\mathrm{x} \ne x </code>  <img src="static/img/blogs/tex/tex4.png"> </p>
+                    <p class=code_example><span>whitespace </span><code>x y z \ne x \; y \; z  </code>  <img src="static/img/blogs/tex/tex5.png"> </p>
+                    <p class=code_example><span>sized brackets </span><code>\left(\sum_{i=0}^n x_i \right)</code>  <img src="static/img/blogs/tex/tex6.png"> </p>
+
+                </div>
+            </div>
+            <div class=grid_duo>
+                <div>
+
+                <h5>Multi </h5>
+                    <p>
+                        There are also some pretty hard expression syntax wise, like matrices. Best read the advanced docs if you want to use these. Or start from one of the examples.
+                        You can find plenty of examples here. Also on the tex input menu in Breakdown Notes you find some matrix examples plus others. Simply click these to add it to
+                        the tex shape on the map, and adapt it from there.
+
+                    </p>
+
+                </div>
+
+                <div > <a href="make/load/mj_examples/" target="_blank"><img src="static/img/blogs/tex/example.png" class=blog alt="examples" ></a>  </div>
+            </div>
+
+
+        </div>
+
+
+        <h3>Styling your expression</h3>
+        <div>
+            <div class=grid_duo>
+                <div>
+                    <p>
+                        You can give the expression any color you want. Also, the characters in the expression can have a border.
+                        Right click an expression to access the context menu, or check out the border en colors field in the
+                        main menu.
+                    </p>
+                    <p>
+                        You can also change the size of the expression. By right clicking an expression, a contextmenu will pop up.
+                        This contains a scale input.  Simply change the scale to make your expression bigger or smaller.
+                    </p>
+
+                    <p>
+                        Unfortunately, there are also some thing you cannot do...
+                        <ul>
+                            <li>You cannot change the font family of the expression</li>
+                            <li>You cannot give different colors or scales to one expression.</li>
+                        </ul>
+
+                    </p>
+                </div>
+                <div >
+                    <p>
+                        If you want to read more about Tex and its syntax this <a href="https://en.wikibooks.org/wiki/LaTeX/Mathematics">wiki</a> is a good starting point.
+                        The expressions are generated using MathJax, which you can learn more about <a href="https://www.mathjax.org">here</a>.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+
+
+
+
+
+
+
+    <div >
+
+    </div>
+
+
+
+
+
+
+</div>
+
+
+
+
+    <div class="copyright">
+        <p>&copy; 2016-2019 - Breakdown-notes - All Rights Reserved  -
+            <a target=_blank href="about/tos/">Terms of service</a>  -
+            <a target=_blank href="about/privacy-policy/">Privacy</a> -
+            <a target=_blank href="about/about/">Contact</a>
+        </p>
+    </div>
+
+</div>
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery.min.js" ></script>
+    <script>
+    $('.navbar li > a.inner_ref').on('click', function(e){
+        if (location.pathname.includes('/blog/') ||
+        location.pathname.includes('/about/')  ){
+            e.preventDefault();
+            location.href = location.origin + '/' + this.getAttribute('href');
+        }
+    });
+    </script>
+
+  </body>
+</html>

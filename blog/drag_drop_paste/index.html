@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <base href="/M3">
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  <meta name="keywords" content="">
+  <meta name="description" content="">
+
+
+        <title>
+         Breakdown Notes
+        </title>
+
+        <link rel="shortcut icon" href=static/favicon.ico type="image/x-icon" />
+        <link rel="icon" href=static/favicon.ico type="image/x-icon" />
+
+
+        <link href=static/css/font-awesome.min.css rel='stylesheet'></link>
+        <link href=static/css/intro.css?blah=176 rel='stylesheet'></link>
+
+        <!-- Begin Cookie Consent plugin by Silktide - http://silktide.com/cookieconsent
+        <script type="text/javascript">
+            window.cookieconsent_options = {"message":"This website uses cookies to ensure you get the best experience","dismiss":"Got it!","learnMore":"More info","link":null,"theme":"dark-bottom"};
+        </script>
+        <script type="text/javascript" src="cdnjs.cloudflare.com/ajax/libs/cookieconsent2/1.0.9/cookieconsent.min.js"></script>
+        End Cookie Consent plugin -->
+
+        <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+        <link href="https://fonts.googleapis.com/css?family=Zilla+Slab" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Poppins:300" rel="stylesheet">
+    </head>
+<body>
+
+
+
+<div id="menu">
+    <div class="navbar">
+        <a id='map-url'  href="make/new/" target="_blank">
+            <img id=logo-small src="static/img/logo.png" alt="logo"/>
+        </a>
+        <ul>
+            <li class="active"><a class=inner_ref href="#top">HOME</a></li>
+            <li class=hidden><a class='inner_ref' href="#features">FEATURES</a></li>
+            <li><a class=inner_ref href="#show_anchor">EXAMPLES</a></li>
+            <li class=hidden><a class='inner_ref' href="#more">ABOUT</a></li>
+            <li><a class=inner_ref href="about/tutorials/">TUTORIALS</a></li>
+            <li><a class=inner_ref href="make/new/" target="_blank">TO THE MAP!</a></li>
+        </ul>
+    </div>
+
+</div>
+
+
+<header >
+    <div >
+        <h1>Drag, drop, copy and paste </h1>
+        <a class='button' id=white href="make/new/" target="_blank">Start mapping</a>
+    </div>
+</header>
+
+
+<link href=static/css/blogs.css rel='stylesheet'></link>
+
+<style>
+</style>
+
+<div class='container blog'>
+	<div>
+		<h1>Importing and copying</h1>
+        <p>
+            Hopefully you will be surprised by the support Breakdown Notes offers to import different types of data.
+            In this blog we will talk about importing images, html snippets and text files, all by dragging and dropping or copying and pasting.
+        </p>
+    </div>
+
+    <div >
+
+    </div>
+
+    <div>
+		<h1>Image Import </h1>
+        <p>First up are Images. You might want to include some image that already captures a lot of information onto a map, or just add it
+            because it looks good. Adding an image is really simple.
+        </p>
+
+        <h3>Adding images</h3>
+        <div>
+            <div class=grid_duo>
+                <div>
+                    <p>
+                        Most of the shapes can be the target of the drop or paste event (lines and icons are excluded).
+                        You can add an image by copy pasting, or dragging and dropping:
+                        If the image is a file, you can simply drag and drop the file onto a shape.
+                        If you have copied the image to the clipboard you can just click a shape and paste it by pressing control v.
+                    </p>
+                    <h3>Fitting the image</h3>
+                    <p>
+                        If you resize the shape, you will notice that the image is not always as big as the shape it is in. Either the shape is bigger,
+                        (and the image is fully contained within it), or the image is bigger (and the shape is fully covered).
+                        By sizing the shape to the size of the image, you can correct this.
+                    </p>
+                    <p>
+                        But we can do this quicker.  Check out the "Image menu".
+                        This should pop up the moment you click a shape that has a background image.
+                        If you want to fit the image to the shape,  press any of the buttons on 'Fit image' tab.
+                        You can choose to do so by making the shape smaller or larger.
+                    </p>
+                    <p>
+                        You can do all the things you could already do with the shape, that is add text to it, resize it etc.
+                    </p>
+                </div>
+                <div > <img src="../img/blogs/drag_drop_paste/drag_image.gif" class='blog top-margin' alt='paragraph displayed' title="click to replay" onclick="this.src=this.src;">  </div>
+            </div>
+
+            <p>
+                A word of warning is in place. Images sizes (in bytes) are big compared to the size of the rest of the map. Adding images
+                and then saving will increase the size of the saved file. Your local store may fill rather quickly, so it is better to download these files,
+                in stead of saving them locally.
+            </p>
+        </div>
+    </div>
+
+
+    <div>
+		<h1>Pasting and dropping text </h1>
+
+        <h3>text from pdf's, webpages, text</h3>
+        <div class=grid_duo>
+            <div>
+                <p>
+                    Breakdown also offers support for importing text files. While importing text files, you can control when a new shape is added,
+                    when a new paragraph is added and in what direction the shapes are added. These controls can be found in <span class='leg leg-1'>Import</span>.
+                </p>
+                <p>
+                    You can import text files by simply dragging and dropping these files onto an empty part of the map.
+                    Or just copy and paste (control c from the text file, then click the map, then control c).
+                </p>
+            </div>
+            <div > <img src="static/img/blogs/drag_drop_paste/import_text.gif" class='blog top-margin'  title="click to replay" onclick="this.src=this.src;">  </div>
+        </div>
+
+        <h3>Seperators</h3>
+        <div class=grid_duo>
+            <div >
+                <p>
+                    By specifing a seperator for new shape and new paragraph, you can control when a new shape is added and when a new paragraph is added.
+                    For instance, for a new shape you might use "\n" (enter), and for a new paragraph use . (a point).
+                    This will add a new shape to the map every time there is a line break (enter) in the text file
+                    and a new paragraph every time it encounters a point.
+
+                <br>
+                    You can also use multiple characters: For instance use a point and a space so that an email address inside a line will not be split over
+                    multiple paragraphs.  Or you might leave one of the seperators empty so you get everyting in one shape, or only one paragraph for each shape.
+                    For spreadsheats, tabs are mostly used as field seperators. You can enter a tab as \t.
+
+                </p>
+            </div>
+            <div > <img src="static/img/blogs/drag_drop_paste/import_tsv.gif" class='blog top-margin'  title="click to replay" onclick="this.src=this.src;">  </div>
+        </div>
+
+        <!-- <div class=grid_duo>
+            <div>
+                <h3>Placement</h3>
+                <p>
+                   In the placement tab in the import menu, you will find options to specify how far apart
+                   shapes are placed while pasting text. There are delta's for horizontal and vertical distances (row / column).
+                </p>
+                <p>
+                    To control how many rows or columns are made while importing, use the limit option.
+                    Implicitely this option also controls the direction the shapes are added to the map.
+                    With a limit of 10 rows, shapes will be placed below each other first, (untill
+                    there are 10), after which the next shapes is places to the right of the first.
+                    With a limit of for instance 4 columns, the shapes are added left to right, and when the first 4 are placed, it will
+                    continue with a new row below the first shape.
+                </p>
+
+            </div>
+            <div > <img src="static/img/blogs/shapes_and_styling/text_on_path.gif" class='blog' alt='paragraph displayed' title="click to replay" onclick="this.src=this.src;">  </div>
+        </div> -->
+
+
+    </div>
+</div>
+
+
+
+
+
+    <div >
+
+    </div>
+
+
+
+
+
+
+</div>
+
+
+
+
+    <div class="copyright">
+        <p>&copy; 2016-2019 - Breakdown-notes - All Rights Reserved  -
+            <a target=_blank href="about/tos/">Terms of service</a>  -
+            <a target=_blank href="about/privacy-policy/">Privacy</a> -
+            <a target=_blank href="about/about/">Contact</a>
+        </p>
+    </div>
+
+</div>
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery.min.js" ></script>
+    <script>
+    $('.navbar li > a.inner_ref').on('click', function(e){
+        if (location.pathname.includes('/blog/') ||
+        location.pathname.includes('/about/')  ){
+            e.preventDefault();
+            location.href = location.origin + '/' + this.getAttribute('href');
+        }
+    });
+    </script>
+
+  </body>
+</html>

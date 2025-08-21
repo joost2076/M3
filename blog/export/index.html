@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <base href="/M3">
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  <meta name="keywords" content="">
+  <meta name="description" content="">
+
+
+        <title>
+         Breakdown Notes
+        </title>
+
+        <link rel="shortcut icon" href=static/favicon.ico type="image/x-icon" />
+        <link rel="icon" href=static/favicon.ico type="image/x-icon" />
+
+
+        <link href=static/css/font-awesome.min.css rel='stylesheet'></link>
+        <link href=static/css/intro.css?blah=176 rel='stylesheet'></link>
+
+        <!-- Begin Cookie Consent plugin by Silktide - http://silktide.com/cookieconsent
+        <script type="text/javascript">
+            window.cookieconsent_options = {"message":"This website uses cookies to ensure you get the best experience","dismiss":"Got it!","learnMore":"More info","link":null,"theme":"dark-bottom"};
+        </script>
+        <script type="text/javascript" src="cdnjs.cloudflare.com/ajax/libs/cookieconsent2/1.0.9/cookieconsent.min.js"></script>
+        End Cookie Consent plugin -->
+
+        <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+        <link href="https://fonts.googleapis.com/css?family=Zilla+Slab" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Poppins:300" rel="stylesheet">
+    </head>
+<body>
+
+
+
+<div id="menu">
+    <div class="navbar">
+        <a id='map-url'  href="make/new/" target="_blank">
+            <img id=logo-small src="static/img/logo.png" alt="logo"/>
+        </a>
+        <ul>
+            <li class="active"><a class=inner_ref href="#top">HOME</a></li>
+            <li class=hidden><a class='inner_ref' href="#features">FEATURES</a></li>
+            <li><a class=inner_ref href="#show_anchor">EXAMPLES</a></li>
+            <li class=hidden><a class='inner_ref' href="#more">ABOUT</a></li>
+            <li><a class=inner_ref href="about/tutorials/">TUTORIALS</a></li>
+            <li><a class=inner_ref href="make/new/" target="_blank">TO THE MAP!</a></li>
+        </ul>
+    </div>
+
+</div>
+
+
+
+<header class=grid_intro>
+    <div>
+        <h1>Exporting as image</h1>
+        <a class='button' id=white href="make/new/" target="_blank">Start mapping</a>
+    </div>
+</header>
+
+
+
+
+
+
+<link href=static/css/blogs.css rel='stylesheet'></link>
+
+
+<style>
+
+    #hero{
+        background: url(static/img/periodic_table_drawn.png) no-repeat;
+        background-size: contain;
+        min-height:400px;
+        margin-top:20px;
+        margin-bottom:22px;
+    }
+
+	h4{
+		text-align: center;
+	}
+	.blog ul, .blog li{
+		margin-left: 50px;
+		list-style-type: circle;
+	}
+
+	.smaller p{
+		font-size: 16px;
+	}
+	.copyright{
+    	margin-top:24px;
+    	background-color: #734b6d;
+	}
+	.copyright a{
+		color:white;
+	}
+
+</style>
+
+<div class='container blog'>
+<section>
+
+    <div >
+		<h1>Making images from your work</h1>
+
+        <p>
+            You might want to make an image of a part of your map. While of course it is possible to use a screen shot
+            program, Breakdown Notes offers support to make images.
+            With this feature it is possible to make images bigger then your screen. We will explain
+            how to proceed in this tutorial.
+        </p>
+
+
+    </div>
+
+
+    <div>
+        <h1>How?</h1>
+        <div class=grid_duo>
+
+
+            <div>
+
+                <p>
+                    To start exporting, first press "add" in the export menu. This will add an blueish rectangle onto
+                    the screen. There are to export modes:
+                </p>
+                <p>
+
+                     The first will keep a fixed ratio (1/ sqrt(2)). This is the standard paper size (A4 etc).
+                     You can set the orientation to landscape or portrait in the export menu.
+                     Your job is to pan and zoom the map so that the part you want to export is inside the region.
+                </p>
+                <p>
+
+                    The second is without this standard ratio. You now get to drag and resize the export region over any part of the map.
+                    Simply make sure everything you want displayed on the image is inside the export region bij dragging and resizing this region.
+                </p>
+
+
+                <p> Once you are happy with the ratio, and what part of the map is inside it (what will be exported), you will
+                    have to choose an export size.
+                    If you kept a fixed ratio, you can choose a paper size ranging from A0 (big) to A6 (small).
+                    If you set a custom ratio, you can choose a scale factor. The resulting image size in pixels will be displayed.
+                </p>
+                <p>
+                    Last steps to finalize the import is to press the export button. This will build the image and open it in a new tab.
+                    Right clicking the image in the tab to save it. You will have to allow "pop-ups" temporary to complete this last step.
+                </p>
+
+            </div>
+            <div > <img src="static/img/blogs/export/export.gif" class='blog' title="click to replay" onclick="this.src=this.src;">  </div>
+        </div>
+
+
+
+    </div>
+
+
+</section>
+
+</div>
+
+
+    <div class="copyright">
+        <p>&copy; 2016-2019 - Breakdown-notes - All Rights Reserved  -
+            <a target=_blank href="about/tos/">Terms of service</a>  -
+            <a target=_blank href="about/privacy-policy/">Privacy</a> -
+            <a target=_blank href="about/about/">Contact</a>
+        </p>
+    </div>
+
+</div>
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery.min.js" ></script>
+    <script>
+    $('.navbar li > a.inner_ref').on('click', function(e){
+        if (location.pathname.includes('/blog/') ||
+        location.pathname.includes('/about/')  ){
+            e.preventDefault();
+            location.href = location.origin + '/' + this.getAttribute('href');
+        }
+    });
+    </script>
+
+  </body>
+</html>

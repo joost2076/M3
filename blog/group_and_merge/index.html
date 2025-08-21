@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <base href="/M3">
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  <meta name="keywords" content="">
+  <meta name="description" content="">
+
+
+        <title>
+         Breakdown Notes
+        </title>
+
+        <link rel="shortcut icon" href=static/favicon.ico type="image/x-icon" />
+        <link rel="icon" href=static/favicon.ico type="image/x-icon" />
+
+
+        <link href=static/css/font-awesome.min.css rel='stylesheet'></link>
+        <link href=static/css/intro.css?blah=176 rel='stylesheet'></link>
+
+        <!-- Begin Cookie Consent plugin by Silktide - http://silktide.com/cookieconsent
+        <script type="text/javascript">
+            window.cookieconsent_options = {"message":"This website uses cookies to ensure you get the best experience","dismiss":"Got it!","learnMore":"More info","link":null,"theme":"dark-bottom"};
+        </script>
+        <script type="text/javascript" src="cdnjs.cloudflare.com/ajax/libs/cookieconsent2/1.0.9/cookieconsent.min.js"></script>
+        End Cookie Consent plugin -->
+
+        <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+        <link href="https://fonts.googleapis.com/css?family=Zilla+Slab" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Poppins:300" rel="stylesheet">
+    </head>
+<body>
+
+
+
+<div id="menu">
+    <div class="navbar">
+        <a id='map-url'  href="make/new/" target="_blank">
+            <img id=logo-small src="static/img/logo.png" alt="logo"/>
+        </a>
+        <ul>
+            <li class="active"><a class=inner_ref href="#top">HOME</a></li>
+            <li class=hidden><a class='inner_ref' href="#features">FEATURES</a></li>
+            <li><a class=inner_ref href="#show_anchor">EXAMPLES</a></li>
+            <li class=hidden><a class='inner_ref' href="#more">ABOUT</a></li>
+            <li><a class=inner_ref href="about/tutorials/">TUTORIALS</a></li>
+            <li><a class=inner_ref href="make/new/" target="_blank">TO THE MAP!</a></li>
+        </ul>
+    </div>
+
+</div>
+
+
+	<header>
+		<div>
+			<h1>Grouping shapes </h1>
+			<a class='button' id=white href="make/new/" target="_blank">Start mapping</a>
+		</div>
+	</header>
+
+
+
+<link href=static/css/blogs.css rel='stylesheet'></link>
+
+
+<style>
+
+</style>
+
+
+<div class='container blog'>
+
+
+	<div >
+		<h1>Groupings shapes </h1>
+		<p>This tutorial will explain a more advances feature of Breakdown Notes: grouping
+			To be more productive with Breakdown Notes, you will want to use grouping often. With this feature, you can
+			select multiple shapes and do an action on all, in one go. You can group shapes, paragraphs or paths.
+			We will talk about ways you can group, and about the actions you can perform on them.
+		</p>
+		<p>
+			Most of the options to group or merge elements are available from the "Group Shapes" menu.
+			Some are also available by using the context menu or hotkeys. All will be explained shortly.
+		</p>
+
+	</div>
+
+	<div>
+
+		<h1 >How to group </h1>
+
+
+		<h3>By control-clicking</h3>
+		<div class=grid_duo>
+			<div>
+				<p>
+					Most simple way to group shapes / paths or paragraphs is by holding control and clicking the
+					shapes you want grouped. To remove a shape from the group, just hold control and click again.
+				</p>
+				<h3>By dragging</h3>
+				<p>
+					You can also group shapes by dragging: Every shape inside the dragged area will be grouped (paragraphs will not be grouped).
+					First press and hold control and then press shift. The mouse cursor should now have changed because you have entered 'drag select'.
+					Now click and hold the mouse and drag over the area with the shapes you want grouped.
+				</p>
+				<p>
+					If you hover one of the shapes in the group, all the elements in the group will be highlighted.
+					To clear a group, simply press escape.
+				</p>
+
+			</div>
+			<div > <img src="static/img/blogs/group_and_merge/group_basic.gif" class='blog' alt='grouping shapes' title="click to replay" onclick="this.src=this.src;">  </div>
+		</div>
+
+
+		<h3>Grouping on attributes</h3>
+		<div class=grid_duo>
+			<div>
+				<p>
+					Another way to group shapes is based of some attribute (color, fill font family ) of the shapes you want grouped.
+
+					First thing you will need to do is open the "subset tab" in the "group shapes" menu.
+					Next click one of the shapes that has the particular attribute you want to group on. Let's
+					say you want to group all rectangles, select a rectangle on the canvas.
+					Then in the grouping menu, click the button describing the attribute, in this case shape.
+				</p>
+				<h3>Filtering an existing group </h3>
+				<p>
+					Grouping on attributes can also be used to filter an already existing group. For instance, you can first
+					select a group by dragging, and then use grouping on some attribute to filter that group:
+					only the shapes in the group that have the attribute will be selected.
+
+					Other shapes that are not already in the group, will be ignored.
+				</p>
+			</div>
+			<div > <img src="static/img/blogs/group_and_merge/group_attr.gif" class='blog' alt='grouping on attributes' title="click to replay" onclick="this.src=this.src;">  </div>
+		</div>
+
+
+		<div >
+			<div>
+				<h3>From shapes to paragraphs</h3>
+				<p>
+					Last feature is specific to paragraphs. If you have a group with shapes, you can 'trade in' your current group for the 'n-th' paragraph inside
+					the shapes in the group.  You start out with a group of shapes, and you end up with a group of only paragraphs. You can specify the
+					paragraph you want (thats to say the first of each shape, or the third). If a shape does not hold that many paragraphs, for that shape nothing will be selected.
+					By setting the 'n-th' paragraph to zero, you will select all paragraphs in the group.
+				</p>
+			</div>
+		</div>
+	</div>
+
+    <div >
+
+    </div>
+
+
+	<div >
+		<h1>What to do with a grouping ? </h1>
+
+
+		<h3>Repositioning and resizing</h3>
+		<div class=grid_duo>
+			<div>
+				<p>
+					The most usefull feature might be to simply move a bunch of shapes to a different part of the map. Just drag one of the
+					shapes and all of the other shapes in the group will also be moved by the same amount. This also works for resizing shapes:
+					All of the shapes will be resized by the same amount.
+				</p>
+
+			</div>
+			<div><img src="static/img/blogs/group_and_merge/group_repos_resize.gif" class='blog'  title="click to replay" onclick="this.src=this.src;">  </div>
+		</div>
+
+
+
+
+
+		<h3>Styling </h3>
+		<div >
+			<div>
+
+				<p>You can style groups all at once. Examples include changing the color, change the border width, or changing the font.
+					For paragraphs you can also change the margin or padding if you use "Paragraph controls" in the menu.
+					For paths you can change the flow, the color or width.
+				</p>
+
+			</div>
+		</div>
+
+		<div >
+			<div>
+				<h3>copying </h3>
+				<p>
+					You can also copy the grouped shapes: right click the canvas at the place where you want the grouped to be copied at,
+					and then press copy group in the context menu.
+				</p>
+			</div>
+		</div>
+
+
+		<h3>Help with alignment</h3>
+		<div class=grid_duo>
+			<div>
+				<p>
+					When shapes are grouped, you can use aligning to get a better layout for this group.
+					Breakdown Notes will try and position shapes along the same vertical and horizontal lines.
+					Also, by putting the shapes in a temporary table, it makes it easier to adjust alignment for
+					shapes in the same rows and columns.
+
+				</p>
+				<p>
+					Just press the align button to try it out. If the alignment is successfull, you will be presented with the option to keep shapes
+					in their new position, or reset them to their old position.
+					Until you make that choice, the shapes in the group will be in table form.
+					This will help you change the alignment for shapes in the same row or coluns,
+				</p>
+				<p>
+					While Breakdown Notes is in this table alignment status, you can hold shift while dragging a shape to only move this shape, and ignore
+					the shapes in the row or column. Pressing keep will remove the table and keep the shapes in the current position, Pressing
+					reset will remove the table and reset the shapes to the positions they were in when you pressed the align button.
+				</p>
+
+
+			</div>
+			<div><img src="static/img/blogs/group_and_merge/group_align.gif" class='blog'  title="click to replay" onclick="this.src=this.src;">  </div>
+		</div>
+		<p>Alignment is intended to be used on about 25 shapes at a time (although it varies a bit on the amount of overlap
+			and order in the shaes). If you use it on more shapes, things might not look good and the table alignment
+			phase might behave in a complicated way. Do not expect wonders. But you can always press reset to restore.   </p>
+
+	</div>
+
+
+
+    <div >
+
+    </div>
+
+
+	<div >
+		<h1 >How to store a group </h1>
+		<div class=grid_duo>
+			<div>
+				<p>
+					You can also store a group, so you can reactivate it later. To store a group, press "Store" in the "fixed" tab of the group shapes menu or use the contextmenu.
+					To reactivate a stored group, just hold shift while clicking on a shape that belongs to that group.
+				</p>
+				<p>
+					You can add a shape to multiple groups if you want. To cycle through groups,
+					just hold shift and repeatedly click the shape.
+				<br>
+					To deactivate a group, but keep it stored, press the deactivate button.
+					Groups you stored, will also be available after you save and reload a map.
+					To delete a group, simply activate it and press the reset button or press escape.
+					Or reset all groups by pressing reset all groups in the "group shapes menu"
+				</p>
+			</div>
+			<div><img src="static/img/blogs/group_and_merge/group_store.gif" class='blog' alt='storing groups' title="click to replay" onclick="this.src=this.src;">  </div>
+		</div>
+	</div>
+
+
+
+
+</div>
+
+
+
+    <div class="copyright">
+        <p>&copy; 2016-2019 - Breakdown-notes - All Rights Reserved  -
+            <a target=_blank href="about/tos/">Terms of service</a>  -
+            <a target=_blank href="about/privacy-policy/">Privacy</a> -
+            <a target=_blank href="about/about/">Contact</a>
+        </p>
+    </div>
+
+</div>
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery.min.js" ></script>
+    <script>
+    $('.navbar li > a.inner_ref').on('click', function(e){
+        if (location.pathname.includes('/blog/') ||
+        location.pathname.includes('/about/')  ){
+            e.preventDefault();
+            location.href = location.origin + '/' + this.getAttribute('href');
+        }
+    });
+    </script>
+
+  </body>
+</html>

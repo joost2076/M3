@@ -1,0 +1,2579 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Breakdown Notes</title>
+    <base href="/M3">
+
+    <meta name="keywords" content="Breakdown mindmap, mindmaps, conceptmap, diagram, diagrams, notes, free, learning">
+    <meta name="description" content="Breakdown notes: Make mindmaps and notes online for free">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <link rel="shortcut icon" href=static/favicon.ico type="image/x-icon" />
+    <link rel="icon" href=static/favicon.ico type="image/x-icon" />
+
+    <script src=static/js/canvas/snap.svg-min.js></script>
+    <script src=static/js/canvas/prism.js></script>
+    <script src=static/js/canvas/canvas_polyfill.js></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.9.1/underscore-min.js"></script>
+    <script src=static/js/canvas/d3.v4_altered.min.js></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src=static/js/canvas/spectrum.js></script>
+    <link href=static/css/spectrum.css rel='stylesheet'/>
+    <link href=static/css/tut.css rel='stylesheet'/>
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" >
+
+    <link rel='stylesheet' href=static/css/map_form.css?blah=175>
+    <link rel='stylesheet' id="map" href=static/css/makemap.css?blah=175>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:600" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
+    <script>
+    WebFont.load({
+        google: {
+        families: ['Cabin', 'Roboto', 'Open Sans', 'Ubuntu', 'PT Sans', 'Roboto Condensed', 'Ubuntu Condensed', 'Amatic SC', 'Zilla Slab', 'Source Code Pro' , 'Lato',
+                    'Handlee', 'Caveat', 'Schoolbell', 'Athiti', 'Kalam', 'Sacramento', 'Comfortaa', 'Hind', 'Lora','Aleo','Montserrat','Raleway','Acme',
+                    'Quattrocento', 'Arimo' ,'Exo', 'Cinzel', 'Orbitron', 'Audiowide' ]
+        }
+    });
+    </script>
+
+
+    <style>
+        #draw_canvas {
+            position: absolute;
+            top: 4px;
+            left: 4px;
+            border:0px solid black;
+            /* z-index:1; */
+            transform: translateZ(0);
+            touch-action: none;
+        }
+        #draw_canvas:focus{
+            outline: none;
+        }
+        #draw_canvas_single, #gui_canvas, #hover_canvas, #cursor_canvas, #grid_canvas{
+            position: absolute;
+            top:4px;
+            left:4px;
+            pointer-events: none;
+            border:0px solid black;
+            touch-action: none;
+        }
+        #gui_canvas{
+            transform: translateZ(0);
+        }
+        #hover_canvas{
+            transform: translateZ(0);
+        }
+        #cursor_canvas{
+            transform: translateZ(0);
+        }
+        #grid_canvas{
+            transform: translateZ(0);
+            background-color:white;
+        }
+        #minimap, #minimap_overlay{
+            position: absolute;
+            top:0%;
+            right:0%;
+            /* pointer-events: none; */
+            border:1px solid black;
+        }
+
+    </style>
+
+
+</head>
+<body>
+
+
+
+<div id=be_patient>
+    <div>
+        <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+    </div>
+    <div>
+        <h2></h2>
+        <p></p>
+    </div>
+</div>
+
+
+<button class="fa fa-caret-left fa-3x" style="display:none;" id='show_button' title="show menu"></button>
+<button class="fa fa-expand fa-3x" style="display:none;" id='full_screen_button' title="full screen"></button>
+<button class="fa fa-keyboard fa-3x" style="display:none;" id='keyboard_button' title="open keyboard"></button>
+<button class="fa fa-eye fa-3x" style="display:none;" id='view_mode_button' title="exit view mode"></button>
+
+
+<canvas id=grid_canvas></canvas>
+<canvas id=draw_canvas  tabindex=1></canvas>
+<canvas id=draw_canvas_single  tabindex=1></canvas>
+<canvas id=hover_canvas   ></canvas>
+<canvas id=cursor_canvas  ></canvas>
+<canvas id=gui_canvas ></canvas>
+<canvas style="display:none" id=copy_canvas ></canvas>
+<canvas style="display:none" id=minimap ></canvas>
+<canvas style="display:none" id=minimap_overlay ></canvas>
+<div id=dummy_copy_hook></div>
+
+
+<div id=menus>
+    <div class="toolbar1">
+        <div id='sidebar' >
+            <div id="infodiv">
+                <div id=slides_menu class=menu_hidden>
+
+
+
+
+
+<div id=fs_container style="position:absolute;z-index:10;width:100%">
+	<fieldset id=fs_slides_form_buttons>
+		<legend>Options     </legend>
+		 <div class='fs_toggle'>
+		 	<div class='flexrow tight'>
+			 	<button class='swap_menu single short'>to edit</button>
+			 	<button class='button_to_tut single short'>tutorial</button>
+
+				<button id=form_remove_all_slides  style="font-size:8.5px;" class='single short'>remove all slides </button>
+				<button id=button_update_all_slides style="font-size:8.5px;" class='single short'>update slides</button>
+			</div>
+		</div>
+	</fieldset>
+
+	<fieldset id=fs_slides_form_update_settings>
+		<legend>Update settings</legend>
+		<div class='fs_toggle'>
+
+			<form id=form_slide_update_action>
+				<div class='flexrow'>
+					<input style="width:8%;margin-top:6px" id=update type="radio" name="update_slide_action" value="update" ><label for=update>always update</label>
+				</div>
+				<div class='flexrow'>
+					<input style="width:8%;margin-top:6px" id=remove checked type="radio" name="update_slide_action" value="remove"><label for=remove>always remove</label>
+				</div>
+				<div class='flexrow'>
+					<input style="width:8%;margin-top:6px" id=message type="radio" name="update_slide_action" value="message"><label for=message>always ask</label>
+				</div>
+
+			</form>
+
+
+		</div>
+
+	</fieldset>
+
+
+	<fieldset>
+		<legend>start new presentation</legend>
+		 <div class='fs_toggle'>
+
+			<div id= form_slide_show_start_controls>
+				<div class='flexrow'>
+					<label>filter</label>
+					<select id=form_slide_show_filter>
+						<option selected=true>none</option>
+						<option>hide</option>
+						<option>fade</option>
+					</select>
+
+				</div>
+				<div class=flexrow>
+					<!-- <label for=slideshow-anim>With fly-over</label>
+					<input type="checkbox" id="slideshow-anim" > -->
+					<button class="single short" id=form_slide_show_start>start</button>
+				</div>
+			</div>
+
+		</div>
+
+		<div id=form_slide_show_controls class=flexrow style='display:none'>
+			<button class=form_slide_show_prev>prev slide</button>
+			<button class=form_slide_show_next>next slide</button>
+			<button class=form_slide_show_stop>stop slideshow</button>
+		</div>
+
+	</fieldset>
+
+
+
+	<fieldset id=fs_slides_form_edit>
+		<legend>Slide controls</legend>
+		 <div class='fs_toggle'>
+
+			<div class='flexrow'>
+				<button class="form_add_slide single short">add</button>
+				<button class="form_make_slide single short hidden" >make</button>
+				<button class="form_update_slide single short hidden">update</button>
+				<button class="form_wrap_slide single short hidden">wrap</button>
+				<button class="form_cancel_slide single short hidden">cancel</button>
+			</div>
+
+			<label id=form_slide_num>  slide num </label>
+			<div class='flexrow'>
+
+				<button class="form_toggle_slider single short hidden">show position</button>
+				<button class="form_slide_exclusion_mode single short hidden">exclude shapes</button>
+				<button class="form_delete_slide single short hidden">remove slide</button>
+			</div>
+
+
+
+		</div>
+	</fieldset>
+
+
+    <fieldset id=fs_help_slides class="last collapsed">
+        <legend class="leg-5 collapsed"  >Help</legend>
+        <div class='fs_toggle' style="display:none">
+        </div>
+    </fieldset>
+
+</div>
+
+<div id=fdasdf>
+
+</div>
+
+
+
+
+
+                </div>
+                <div id=edit_mode_menu>
+
+
+    <div id=form_slide_under style="position:absolute;z-index:5;width:100%">
+    <fieldset class=collapsed>
+        <legend class='leg-5 collapsed'>Sign in/out
+            <img id="ad_border" src="static/img/logo.png" alt="logo">
+        </legend>
+
+        <div class='fs_toggle' style="display:none">
+            <!-- <div id=form_git_username class=login>
+
+                <a href=# id=form_github_sign_out title="Sign out fron Github" class="fa fa-sign-out fa-2x" style="display:none" ></a>
+                <a href=# id=form_github_login title="Sign in with github" class="fa fa-github fa-2x" style="display:block"></a>
+                <span>asd</span>
+            </div> -->
+            <span>Saving to Github coming back soon</span>
+        </div>
+    </fieldset>
+
+    <fieldset id=fs_maps class=collapsed>
+        <legend class='leg-5 collapsed'>Save Load New</legend>
+        <div class='fs_toggle' style="display:none">
+            <div class='flexrow tight'>
+                <button class='single short open_modal_load'>load</button>
+                <button class='single short open_modal_save'>save</button>
+                <button class='single short button-new-map'>new map</button>
+            </div>
+        </div>
+    </fieldset>
+
+    <fieldset id=fs_buttons class=collapsed>
+        <legend class='leg-5 collapsed'>Options</legend>
+        <div class='fs_toggle' style="display:none">
+            <div class='flexrow tight'>
+                <!--<button class='single button_to_tut'>to tutorial</button>-->
+                <button id=button_tut_restart class='single short'>tutorial</button>
+                <button class='single short button_to_hotkeys'>hot keys</button>
+                <button class='single short swap_menu'>to slides</button>
+                <button class='single short form_study_mode' style='display:none;'>study mode</button>
+                <button class='single short' id=form_view_mode>view mode</button>
+            </div>
+
+
+
+            <div id=form_toggle_advanced_options class='flexrow spacy'>
+                <label>Show advanced options</label>
+                <div class='toggle-button'>
+                    <button></button>
+                </div>
+            </div>
+
+
+
+        </div>
+    </fieldset>
+
+    <fieldset id=fs_study_mode class=collapsed style="display:none">
+        <legend class='leg-5 collapsed'>Study mode</legend>
+        <div class='fs_toggle' style="display:none">
+
+            <div class='submenus flexrow'>
+                <h4 >study </h4>
+                <h4 class=active>One-by-one</h4>
+            </div>
+
+            <div class='sub' style="display:none">
+                <div class='flexrow tight'>
+                    <button class='single form_shuffle_flash_cards' >shuffle</button>
+                    <button class='single form_flip_all_flash_cards' >flip all</button>
+                    <button class='single form_study_mode'>exit mode</button>
+                </div>
+                <div class=flexrow>
+                    <label>flash time</label>
+                    <input id=form_flash_time type="number" value=2000 min=750, step= 250 max=25000>
+                </div>
+            </div>
+
+            <div class=sub >
+                <div class='flexrow'>
+                    <label>check</label><input id=form_one_by_one_check_by_typing type="checkbox">
+                </div>
+                <div class='flexrow'>
+                    <label>scored</label><input id=form_one_by_one_scored disabled type="checkbox">
+                </div>
+                <div class='flexrow'>
+                    <label>one by one</label>
+                    <button id=form_study_one_by_one_start class=single>start</button>
+                    <!--<button id=form_study_one_by_one_reset  class=single>reset</button>-->
+                    <button id=form_study_one_by_one_stop  class=single>stop</button>
+                </div>
+
+                <div class=flexrow>
+                    <label>Filter</label>
+                    <select id=form_study_filter>
+                        <option>none</option>
+                        <option selected=true>hide</option>
+                        <option>fade</option>
+                    </select>
+                </div>
+
+                <div id=form_one_by_one_controls class=flexrow style="display:none">
+                    <label>Study</label>
+                    <button id=form_study_one_by_one_next class=single>next</button>
+                    <button id=form_study_one_by_one_flip class=single>flip</button>
+                </div>
+            </div>
+
+        </div>
+    </fieldset>
+
+    <fieldset id=fs_export class=collapsed>
+        <legend class='leg-5 collapsed'>Export</legend>
+        <div class='fs_toggle' style="display:none">
+            <div>
+
+                <div id=form_print_region_mode class=flexrow>
+                    <button class=single id=form_print_add_print_region>start</button>
+                    <button id=form_remove_print_region class=single style="display:none" > abort</button>
+                </div>
+
+
+                <div style="display:none;" id=form_print_buttons >
+
+                    <div>
+                        <h6 style="font-size:16px;text-decoration:underline;;margin:0;">choose region to export</h6>
+                        <div class=flexrow>
+                            <label for=form_print_A_ratio> keep A4 paper size</label>
+                            <input type=checkbox  checked id="form_print_A_ratio">
+                        </div>
+
+                        <div class=form_print_output_size_A_scale  style='display:none;'>
+                            <div class=flexrow >
+                                <label>Layout</label>
+                                <select class='cm-print-layout keep-open'>
+                                    <option value='portrait'>portrait</option>
+                                    <option value='landscape' >landscape</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class=flexrow>
+                        <button class='cm-print-print single'>print</button>
+                        <span style="font-size:8px;"> If you do not see a pop up of your export, be sure
+                            to disable your add blocker</span>
+                    </div>
+
+
+                    <div>
+                        <h6 style="font-size:16px;text-decoration:underline;margin:0;">output options</h6>
+
+                        <div class=flexrow>
+                            <select id="form_print_to_image">
+                                <option selected value='image'>as image</option>
+                                <option value='pdf'>as pdf</option>
+                            </select>
+
+                        </div>
+
+
+                        <div class="form_print_output_size_A_scale flexrow">
+
+                            <label>Choose print size</label>
+
+                                <select id='form_print_size' style="width:40px">
+                                    <option value='A0'>A0</option>
+                                    <option value='A1'>A1</option>
+                                    <option value='A2'>A2</option>
+                                    <option value='A3'>A3</option>
+                                    <option selected value='A4'>A4</option>
+                                    <option value='A5'>A5</option>
+                                    <option value='A6'>A6</option>
+                                </select>
+
+                        </div>
+
+                        <div class=flexrow>
+                            <label for=form_printer_no_background>No background</label>
+                            <input type=checkbox  id="form_printer_no_background"/>
+                        </div>
+
+                        <div id=form_print_output_size_custom  style='display:none;'>
+
+                            <div id='form_print_output_scale' class='plusminus flexrow'>
+                                <label>scale</label>
+                                <button class='plus'>+</button>
+                                <input value='1'/>
+                                <button class='minus'>-</button>
+                            </div>
+                            <div id=form_print_result_print_size>
+                                output format 1000 x 1000
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                </div>
+
+                <a style='display:none;' id=cm-print-download>Download</a>
+            </div>
+
+        </div>
+    </fieldset>
+
+
+
+    <fieldset id='fs_shapes' >
+        <legend class='leg-3'>Shapes</legend>
+        <div class='fs_toggle' >
+            <svg id='shapes_svg'></svg>
+        </div>
+    </fieldset>
+
+    <fieldset id='fs_styles' class=collapsed>
+        <legend class='leg-3 collapsed' >Colors</legend>
+        <div class='fs_toggle' style="display:none">
+            <div class=sub>
+                <svg id='colors_svg'></svg>
+            </div>
+
+            <div id='form_fill'>
+                <label>Custom color</label>
+                <input id='colorpicker' value="#ffc42e" >
+            </div>
+
+            <!-- in js code verplaatst in colorpicker                                        -->
+            <div id='form_fill_what' class='flexcol tight'>
+                <button id=ffw_fill class='onoff-top onoff-on' value=fill>fill</button>
+                <button id=ffw_stroke2 class='onoff-stacked-mid' value=border>border</button>
+                <button id=ffw_text class='onoff-stacked-mid' value=text>text</button>
+                <button id=ffw_stroke class='onoff-bottom' value=stroke>border</button>
+
+            </div>
+        </div>
+    </fieldset>
+
+
+
+
+
+
+
+    <fieldset id='fs_rough' class=collapsed>
+        <legend class='leg-2 collapsed' >Sketch</legend>
+        <div class='fs_toggle' style="display:none">
+
+
+            <div class=flexrow>
+                <button id=form_make_rough  class='single'>Sketch</button>
+                <button id=form_undo_rough  class='single short narrow'>Undo </button>
+            </div>
+
+
+
+            <div class=flexrow><label>Roughness</label></div>
+            <div id='form_roughness' class=flexrow >
+                <button class='onoff-left onoff-on' roughness=1 >neat</button>
+                <button class=onoff-mid roughness=2>normal</button>
+                <button class=onoff-mid roughness=4>messy</button>
+                <button class=onoff-right roughness=7>shaky</button>
+
+            </div>
+
+
+            <!-- <div id='form_rough_bow' class='plusminus flexrow'>
+                <label>Roundness</label>
+                <button class='plus'>+</button>
+                <input value='10'/>
+                <button class='minus'>-</button>
+            </div>                -->
+
+            <div class=flexrow >
+                <label for=form_roughen_all>sketch all new shapes</label>
+                <input type=checkbox id="form_roughen_all"/>
+            </div>
+            <!-- <div class=flexrow>
+                <label for=form_rough_fill>Fill with lines</label> <input  type=checkbox id="form_rough_fill"/>
+            </div> -->
+
+            <!-- <div id=form_rough_fill_lines style="display:none">
+                <div id='form_hachure_angle' class='plusminus flexrow'>
+                    <label>Angle</label>
+                    <button class='plus'>+</button>
+                    <input value='120'/>
+                    <button class='minus'>-</button>
+                </div>
+                <div id='form_hachure_gap' class='plusminus flexrow'>
+                    <label>Gap</label>
+                    <button class='plus'>+</button>
+                    <input value='0'/>
+                    <button class='minus'>-</button>
+                </div>
+            </div> -->
+        </div>
+    </fieldset>
+
+
+
+
+    <fieldset id='fs_levels' class=collapsed >
+        <legend class='leg-2 collapsed'>Levels</legend>
+
+        <div class='fs_toggle' style="display:none">
+
+            <div id=form_toggle_infinity class='flexrow spacy'>
+                <label>Use levels</label>
+                <div  class='toggle-button toggle-button-selected'>
+                    <button></button>
+                </div>
+            </div>
+
+            <label>Set level</label>
+            <div  id=form_set_infinity_level>
+                <div class=flexrow>
+
+                    <button class='onoff-left' value="L0">L0</button>
+                    <button class='onoff-mid onoff-on' value="L1">L1</button>
+                    <button class='onoff-mid' value="L2">L2</button>
+                    <button class='onoff-right' value="L3">L3</button>
+                </div>
+            </div>
+
+
+
+        </div>
+    </fieldset>
+
+
+
+
+
+    <fieldset id=fs_grouping_quick class=collapsed>
+        <legend class='leg-2 collapsed'>Group Shapes</legend>
+        <div class='fs_toggle' style="display:none">
+
+            <div class='submenus flexrow'>
+
+                <h4 class=active>SubSet</h4>
+                <h4>Fixed</h4>
+                <h4>Other</h4>
+
+
+            </div>
+
+            <div class='sub tab_border'>
+
+                <div id=form_search_for_grouping>
+                    <div class=flexrow>
+
+                        <button class="single short no-help"  search_attrib='fill' >fill  </button>
+                        <button class="single short no-help"  search_attrib='stroke'>stroke  </button>
+                        <button class="single short no-help"  search_attrib='stroke_width'>stroke-width  </button>
+                        <button class="single short no-help"  search_attrib='stroke_dasharray'>stroke-dasharray  </button>
+
+                    </div>
+                    <div class=flexrow>
+                        <button class="single short no-help" search_attrib='font_family'>font  </button>
+                        <button class="single short no-help" search_attrib='font_size'>font-size  </button>
+                        <button class="single short no-help" search_attrib='color'>color  </button>
+                    </div>
+
+
+                    <div class=flexrow>
+                        <button class="single short no-help" search_attrib='style_class'>style class  </button>
+                        <button class="single short no-help" search_attrib='text_align'>text align  </button>
+                        <button class="single short no-help" search_attrib='level'>level</button>
+                    </div>
+
+                    <div class=flexrow>
+                        <button class="single short no-help" search_attrib='shape' >shape</button>
+                        <button class="single short no-help" search_attrib='flow'>flow</button>
+                        <button class="single short no-help" search_attrib='type'>type</button>
+                        <button class="single short no-help" search_attrib='width'>width</button>
+                        <button class="single short no-help" search_attrib='height'>height</button>
+                    </div>
+
+                </div>
+
+
+                <div class=flexrow>
+                    <label>reset</label>
+                    <button id='button_group_reset' class='single short small'></button>
+                </div>
+            </div>
+            <div class='sub tab_border' style='display:none' >
+
+                <div  style="display:none;" class='flexrow when_group'>
+                    <button class='form_temp_group_to_perm single'>Store</button>
+                    <button class='form_temp_group_to_perm_deactivate single'>Store & deactivate</button>
+                    <button class='form_deselect_group single'>De-activate</button>
+                    <button class='form_paste_group single'>Paste</button>
+                    <button class='form_reset_group single'>Delete</button>
+                </div>
+                <button id=form_group_delete_all>Delete all</button>
+
+
+
+            </div>
+            <div class='sub tab_border' style='display:none' >
+
+                <label>Resize all in group</label>
+                <div id=form_resize style="clear:both;">
+                    <button class='single short narrow' value=height> height </button>
+                    <button class='single short narrow' value=both>both</button>
+                    <button class='single short narrow' value=width> width </button>
+                </div>
+
+                <label>disperse group</label>
+                <div style="clear:both;">
+                    <button class='single short narrow form_group_disperse_a'>hor - </button>
+                    <button class='single short narrow form_group_disperse_b'>hor + </button>
+                    <button class='single short narrow form_group_disperse_c'>vert - </button>
+                    <button class='single short narrow form_group_disperse_d'>vert + </button>
+                </div>
+            </div>
+
+        </div>
+    </fieldset>
+
+    <fieldset id='fs_zoom_pos' class=collapsed style="display:none">
+        <legend class='leg-2 collapsed' >Zoom and Positioning</legend>
+        <div class='fs_toggle' style="display:none">
+
+            <div class='submenus flexrow'>
+                <h4 class=active> general</h4>
+                <h4> grid</h4>
+            </div>
+
+
+
+            <div class='sub tab_border' >
+
+
+
+
+                <div id=form_toggle_plumb_lines class='flexrow spacy'>
+                    <label>Show plumb lines on move</label>
+                    <div  class='toggle-button toggle-button-selected'>
+                        <button></button>
+                    </div>
+                </div>
+
+
+
+                <div id='form_move_with_arrow_delta' class="center">
+                    <div id ='form_move_delta' class='flexrow spacy'>
+                        <label>Fine position move</label>
+                        <div class='toggle-button'>
+                            <button></button>
+                        </div>
+                    </div>
+                    <div id='form_size_delta' class='flexrow spacy'>
+                        <label>Fine position resize</label>
+                        <div class='toggle-button'>
+                            <button></button>
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+
+            <div class='sub tab_border' style="display:none;">
+
+                <div id='form_grid_step' class='flexrow'>
+                    <label>Grid delta</label>
+                    <button class='plus'>+</button>
+                    <input value='4'/>
+                    <button class='minus'>-</button>
+                </div>
+
+
+
+                <div class=flexrow>
+                    <label>Snap to grid</label>
+                    <button id=form_grid_snap class='single short narrow'>pos</button>
+                    <button id=form_grid_size class='single short narrow'>size</button>
+                </div>
+
+
+
+
+                <div id=form_toggle_grid_lines class='flexrow spacy'>
+                    <label>Show lines</label>
+                    <div  class='toggle-button'>
+                        <button></button>
+                    </div>
+                </div>
+
+                <div id='form_grid_lines_dx' class='flexrow'>
+                    <label>Delta x</label>
+                    <button class='plus'>+</button>
+                    <input value='20'/>
+                    <button class='minus'>-</button>
+                </div>
+                <div id='form_grid_lines_dy' class='flexrow'>
+                    <label>Delta y</label>
+                    <button class='plus'>+</button>
+                    <input value='20'/>
+                    <button class='minus'>-</button>
+                </div>
+
+
+                <div id='form_grid_lines_width' class=flexrow>
+                    <label>width</label>
+                    <button class='plus'>+</button>
+                    <input value='5'/>
+                    <button class='minus'>-</button>
+                </div>
+
+
+
+            </div>
+
+
+        </div>
+    </fieldset>
+
+
+    <fieldset id='fs_font'  class=collapsed>
+        <legend  class='leg-4 collapsed'>Fonts</legend>
+        <div class='fs_toggle' style="display:none">
+
+            <div class='submenus flexrow'>
+                <h4 class=activate > Sizing</h4>
+                <h4 > Styling</h4>
+                <h4 > Fitting</h4>
+            </div>
+
+
+
+            <div class='sub tab_border' >
+                <div class='form_font_class flexrow'>
+                    <label>Quick</label>
+                    <button class='onoff-left font1_holder'>XL</button>
+                    <button class='onoff-mid font2_holder'>L</button>
+                    <button class='onoff-mid font3_holder'>R</button>
+                    <button class='onoff-mid font4_holder'>S</button>
+                    <button class='onoff-right font5_holder'>XS</button>
+                </div>
+
+                <div id='form_font_size' class='plusminus flexrow'>
+                    <label>Specific</label>
+                    <button class='plus'>+</button>
+                    <input value='15'/>
+                    <button class='minus'>-</button>
+                </div>
+
+            </div>
+
+            <div class='sub tab_border' style='display:none;'>
+                <div id='editor-container'>
+                    <div id='form_font' class='flexrow'>
+                        <label>Font</label>
+                        <div id=form_fonts_list></div>
+                    </div>
+
+                    <div id='form_styling' class='flexrow'>
+                        <label>Style</label>
+                        <button class="button_bold">Bold</button>
+                        <button class="button_italic">Italic</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class='sub tab_border' style='display:none;'>
+                <h5 style="margin:0;text-align:left;">to fit text in shape, change the:</h5>
+                <div class=flexrow>
+                    <form id=form_font_resize_action style="min-width:180px">
+                        <input type="radio" style="width:13px" id=form_font_resize_action_width
+                            name="action" value="width" checked />
+                        <label for="form_font_resize_action_width">width</label>
+
+                        <input type="radio"  style="width:13px" id=form_font_resize_action_height
+                            name="action" value="height" />
+                        <label for="form_font_resize_action_height">height</label>
+                    </form>
+                </div>
+
+                <div id='form_max_width' class='plusminus flexrow'>
+                    <label>max width </label>
+                    <button class='plus'>+</button>
+                    <input value="300"/>
+                    <button class='minus'>-</button>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+
+
+    <fieldset id='fs_border' class=collapsed>
+        <legend class='leg-4 collapsed'>Border Controls</legend>
+        <div class='fs_toggle' style="display:none">
+            <div class=flexrow id=form_border_inner_outer>
+                <label>inner</label><input type=checkbox id="form_border_inner">
+            </div>
+
+            <div id='form_border_width' class='plusminus flexrow'>
+                <label>Width</label>
+                <button class='plus'>+</button>
+                <input/>
+                <button class='minus'>-</button>
+            </div>
+
+            <div>
+                <div id=form_border_side class=flexrow>
+                    <label>side only</label>
+                    <button class='onoff-left'>top</button>
+                    <button class='onoff-mid'>right</button>
+                    <button class='onoff-mid' >bottom</button>
+                    <button class='onoff-right'>left</button>
+                </div>
+
+                <div id='form_border_dash' class='flexrow'>
+                    <label>Dots 'n dashes </label>
+                    <input/>
+                </div>
+
+
+                <div id=form_border_dash_single >
+                <div class="flexrow form_border_dash_styles">
+                    <svg width=80 height = 20>
+                        <path d="M0 10 L80 10" style="stroke:black; stroke-width:2px;stroke-dasharray:10 4;"  >    </path>
+                    </svg>
+                    <svg width=80 height = 20>
+                        <path d="M0 10 L80 10" style="stroke:black; stroke-width:2px;stroke-dasharray:14 10;"  >    </path>
+                    </svg>
+                    <svg width=80 height = 20>
+                        <path d="M0 10 L80 10" style="stroke:black; stroke-width:2px;stroke-dasharray:2;"  >    </path>
+                    </svg>
+                    <svg width=80 height = 20>
+                        <path d="M0 10 L80 10" style="stroke:black; stroke-width:2px;stroke-dasharray:8;"  >    </path>
+                    </svg>
+                </div>
+                <div class="flexrow form_border_dash_styles">
+                    <svg width=80 height = 20>
+                        <path d="M0 10 L80 10" style="stroke:black; stroke-width:2px;stroke-dasharray:4 10;"  >    </path>
+                    </svg>
+                    <svg width=80 height = 20>
+                        <path d="M0 10 L80 10" style="stroke:black; stroke-width:2px;stroke-dasharray:10 14;"  >    </path>
+                    </svg>
+                    <svg width=80 height = 20>
+                        <path d="M0 10 L80 10" style="stroke:black; stroke-width:2px;stroke-dasharray:10 2;"  >    </path>
+                    </svg>
+                    <svg width=80 height = 20>
+                        <path d="M0 10 L80 10" style="stroke:black; stroke-width:2px;stroke-dasharray:2 10;"  >    </path>
+                    </svg>
+                </div>
+                </div>
+
+
+                <div id=form_border_dash_double >
+                <div class="flexrow form_border_dash_styles">
+                    <svg width=80 height = 20>
+                        <path d="M0 10 L80 10" style="stroke:red; stroke-width:4px;stroke-dasharray:10 4;"  >    </path>
+                        <path d="M0 10 L80 10" style="stroke:black; stroke-width:2px;stroke-dasharray:10 4;"  >    </path>
+
+                    </svg>
+                    <svg width=80 height = 20>
+                        <path d="M0 10 L80 10" style="stroke:red; stroke-width:4px;stroke-dasharray:10 4;"  >    </path>
+                        <path d="M0 10 L80 10" style="stroke:black; stroke-width:2px;stroke-dasharray:2;"  >    </path>
+
+                    </svg>
+                    <svg width=80 height = 20>
+                        <path d="M0 10 L80 10" style="stroke:red; stroke-width:4px;stroke-dasharray:10 4;"  >    </path>
+                        <path d="M0 10 L80 10" style="stroke:black; stroke-width:2px;stroke-dasharray:2;"  >    </path>
+
+                    </svg>
+                    <svg width=80 height = 20>
+                        <path d="M0 10 L80 10" style="stroke:red; stroke-width:4px;stroke-dasharray:10 4;"  >    </path>
+                        <path d="M0 10 L80 10" style="stroke:black; stroke-width:2px;stroke-dasharray:8;"  >    </path>
+                    </svg>
+                </div>
+
+
+                <div class="flexrow form_border_dash_styles">
+                    <svg width=80 height = 20>
+                        <path d="M0 10 L80 10" style="stroke:red; stroke-width:4px;stroke-dasharray:20;"  >    </path>
+                        <path d="M0 10 L80 10" style="stroke:black; stroke-width:2px;stroke-dasharray:0 28 4 8;"  >    </path>
+
+                    </svg>
+                    <svg width=80 height = 20>
+                        <path d="M0 10 L80 10" style="stroke:red; stroke-width:4px;stroke-dasharray:10;"  >    </path>
+                        <path d="M0 10 L80 10" style="stroke:black; stroke-width:2px;stroke-dasharray:0 ;"  >    </path>
+
+                    </svg>
+                    <svg width=80 height = 20>
+                        <path d="M0 10 L80 10" style="stroke:red; stroke-width:4px;stroke-dasharray:0 10 10;"  >    </path>
+                        <path d="M0 10 L80 10" style="stroke:black; stroke-width:2px;stroke-dasharray:0;"  >    </path>
+
+                    </svg>
+                    <svg width=80 height = 20>
+                        <path d="M0 10 L80 10" style="stroke:red; stroke-width:4px;stroke-dasharray:20;"  >    </path>
+                        <path d="M0 10 L80 10" style="stroke:black; stroke-width:2px;stroke-dasharray:0 7 6 7;"  >    </path>
+                    </svg>
+                </div>
+                </div>
+            </div>
+
+        </div>
+    </fieldset>
+
+    <fieldset id=fs_rect_canvas class=collapsed  style="display:none">
+        <legend class='leg-4 collapsed'>Subcanvas Controls</legend>
+        <div class='fs_toggle' style="display:none">
+            <!-- <div class=flexrow>
+                <label>Move</label>
+                <button class='form_to_top single'>to top</button>
+                <button class='form_cov_to_top single'>to bottom</button>
+            </div> -->
+
+
+            <div class=flexrow>
+                <label>repos merged shapes</label>
+                <input type=checkbox id="form_repos_covered" >
+            </div>
+
+
+        </div>
+    </fieldset>
+
+
+    <fieldset id=fs_fig_stuff class=collapsed>
+        <legend class='leg-4 collapsed'>Shape Controls</legend>
+        <div class='fs_toggle' style="display:none">
+
+            <div class='submenus flexrow'>
+                <h4 class=active>general</h4>
+                <h4>margins</h4>
+            </div>
+
+            <div class='sub tab_border' >
+
+
+                <div class=flexrow>
+                    <label>copy</label>
+                    <button class='form_copy single short'>shape</button>
+                    <button class='copy_styles single short'>style</button>
+                </div>
+                <div class=flexrow>
+                    <label for=form_copy_with_text>copy with text</label><input id=form_copy_with_text checked type=checkbox>
+                </div>
+                <div class=flexrow>
+                    <select id=form_language_for_syntax_highlight>
+                        <option selected value=javascript>javascript</option>
+                        <option value=c>c</option>
+                        <option value=csharp>c#</option>
+                        <option value=cpp>cpp</option>
+                        <option value=css>css</option>
+                        <option value=html>html</option>
+                        <option value=go>go</option>
+                        <option value=graphql>graphql</option>
+                        <option value=java>java</option>
+                        <option value=json>json</option>
+                        <option value=jsx>jsx</option>
+                        <option value=latex>latex</option>
+                        <option value=markup>markup</option>
+                        <option value=php>php</option>
+                        <option value=plsql>plsql</option>
+                        <option value=python>python</option>
+                        <option value=regex>regex</option>
+                        <option value=ruby>ruby</option>
+                        <option value=rust>rust</option>
+                        <option value=sql>sql</option>
+                        <option value=tsx>tsx</option>
+                        <option value=typescript>typescript</option>
+                    </select>
+                    <button class=form_syntax_highlight_item>go</button>
+                </div>
+                <div class=flexrow>
+                    <label for=form_syntax_highlight_dark_mode >dark mode</label>
+                    <input type=checkbox name=form_syntax_highlight_dark_mode id="form_syntax_highlight_dark_mode" />
+                </div>
+            </div>
+
+            <div class='sub tab_border' style="display:none;">
+                <div class='flexrow form_fig_has_path'>
+                    <label>paths</label>
+                    <button class='form_disp_go single short'>disperse</button>
+                    <button class='form_no_disp single short'>same</button>
+                </div>
+
+
+                <div id=form_article_padding class=flexrow>
+                    <label>inside padding</label>
+                    <button class='plus'>+</button>
+                    <input/>
+                    <button class='minus'>-</button>
+                </div>
+
+                <div class=flexrow>
+                    <label>even out paragraphs</label>
+                    <button class='form_even_out_pars single short'></button>
+                </div>
+                <div class=flexrow>
+
+                    <label>reset margins</label>
+                    <button class="form_reset_par_margins_all single short"></button>
+                </div>
+            </div>
+        </div>
+
+    </fieldset>
+
+    <fieldset id=fs_image class=collapsed  style="display:none">
+        <legend class='leg-4 collapsed'>Image Controls</legend>
+        <div class='fs_toggle' style="display:none">
+
+            <!-- <div class='flexrow background_size'>
+                <label>Sizing</label>
+                <button class='background_contain onoff-left onoff-on' >Contain</button>
+                <button class='background_cover onoff-right'>Cover</button>
+            </div> -->
+            <div class=flexrow id=form_img_fit >
+                <label>Fit image</label>
+                <button class='background_fit_larger onoff-left'>larger</button>
+                <button class='background_fit_smaller onoff-mid'>smaller</button>
+                <button class='background_fit_orig onoff-right'>original</button>
+            </div>
+
+        </div>
+
+    </fieldset>
+
+
+
+    <fieldset id='fs_para' class=collapsed  style="display:none">
+        <legend class='leg-4 collapsed'>Paragraph Controls</legend>
+        <div class='fs_toggle' style="display:none">
+
+            <div class='submenus flexrow'>
+                <h4 class=active>Prefix</h4>
+                <h4>Positioning</h4>
+            </div>
+
+            <div class='sub tab_border'>
+                <div class='form_paragraph_prefix flexrow' style="float:right">
+                    <button class='onoff-left' value=bullet>&#x2022;</button>
+                    <button class='onoff-mid' value=triangle>&#x2023;</button>
+                    <button class=onoff-mid value=rhombus>&#x2666;</button>
+                    <button class=onoff-mid value=check>&#x2713;</button>
+                    <button class=onoff-mid value=cross>&#x2717;</button>
+                    <button class=onoff-right value=arrow>&#x279e;</button>
+
+                </div>
+
+            </div>
+
+
+
+            <div class='sub tab_border' style="display:none">
+
+                <div class=flexrow>
+                    <label for=form_ccwl>set to shape width</label>
+                    <button id="form_ccwl"  class='single short small chunk_cover_whole_line'></button>
+                </div>
+
+
+                <div class='flexrow'>
+                    <label>reset margin</label>
+                    <button id=form_reset_par_margin  class='single short small'></button>
+                </div>
+
+                <div class='flexrow'>
+                    <label>clear style</label>
+                    <button class='form_paragraph_clear_style single short small'></button>
+                </div>
+
+
+
+                <div id='form_paragraph_padding_top' class='flexrow par_only'>
+                    <label>margin top</label>
+                    <button class='plus'>+</button>
+                    <input value='15'/>
+                    <button class='minus'>-</button>
+                </div>
+                <div id='form_paragraph_padding_left' class='flexrow'>
+                    <label>margin left</label>
+                    <button class='plus'>+</button>
+                    <input value='0'/>
+                    <button class='minus'>-</button>
+                </div>
+
+                <div id='form_paragraph_line_height' class='flexrow par_only'>
+                    <label>Line height</label>
+                    <button class='plus'>+</button>
+                    <input value='1'/>
+                    <button class='minus'>-</button>
+                </div>
+
+
+
+            </div>
+
+        </div>
+    </fieldset>
+
+
+
+
+    <fieldset id='fs_path' class=collapsed  style="display:none">
+        <legend class='leg-4 collapsed'>Path Controls</legend>
+
+        <div class='fs_toggle' style="display:none">
+
+             <div class='submenus flexrow'>
+                <h4 class=active>Flow</h4>
+                <h4>Direction</h4>
+            </div>
+
+            <div class='sub tab_border'>
+
+
+                <div id='form_path_style'>
+                    <label>Flow</label>
+                    <div class='flexrow'>
+                        <button class=svg_holder><svg class='buttonsvg'></svg></button>
+                        <button class=svg_holder><svg class='buttonsvg'></svg></button>
+                        <button class=svg_holder><svg class='buttonsvg'></svg></button>
+                        <button class=svg_holder><svg class='buttonsvg'></svg></button>
+                    </div>
+                    <div class='flexrow'>
+                        <button class=svg_holder><svg class='buttonsvg'></svg></button>
+                        <button class=svg_holder><svg class='buttonsvg'></svg></button>
+                        <button class=svg_holder><svg class='buttonsvg'></svg></button>
+                        <button class=svg_holder><svg class='buttonsvg'></svg></button>
+                    </div>
+
+
+
+                </div>
+
+
+                <div class='form_path_style2 flexrow'>
+                    <label>Style</label>
+                    <select>
+                        <option value=plain>plain</option>
+                        <option value=double>double</option>
+                    </select>
+                </div>
+
+                <div id=form_collision_detection class=flexrow>
+                    <label >collision detection</label>
+                    <div class="toggle-button toggle-button-selected">
+                        <button></button>
+                    </div>
+                </div>
+                <div class='flexrow'>
+                    <label for=form_always_add_arrow>add arrow to every new path</label>
+                    <input id=form_always_add_arrow checked type="checkbox"/>
+                </div>
+            </div>
+
+            <div id='form_path_side' class='sub tab_border'  style='display:none;'>
+
+                <label style="width:70px;">direction</label>
+                <div style="display:block; height:70px;margin-left:120px" >
+                    <div id=form-path-directions-from class=path_direction_tail style="position:absolute"></div>
+                    <div id=form-path-directions-to   class=path_direction_head  style="position:absolute"></div>
+                </div>
+
+                <button class='form_path_reset'>Reset</button>
+                <!-- <button class='form_bind_path_to_par'>Bind</button> -->
+            </div>
+
+
+
+        </div>
+    </fieldset>
+
+    <fieldset id='fs_path_label' class=collapsed  style="display:none">
+        <legend class='leg-4 collapsed'>Arrows</legend>
+
+        <div class='fs_toggle' style="display:none">
+
+
+
+
+            <div class=flexrow>
+                <label>Start of Path</label>
+            </div>
+            <div class='form_path_end_fig' class='flexrow'>
+
+                <button class=svg_holder side=head><svg class='buttonsvg'></svg></button>
+                <button class=svg_holder side=head><svg class='buttonsvg'></svg></button>
+                <button class=svg_holder side=head><svg class='buttonsvg'></svg></button>
+
+            </div>
+            <div class=flexrow>
+            <label>End of Path</label>
+            </div>
+            <div class='form_path_end_fig' class='flexrow'>
+                <button class=svg_holder side=tail ><svg class='buttonsvg'></svg></button>
+                <button class=svg_holder side=tail><svg class='buttonsvg'></svg></button>
+                <button class=svg_holder side=tail><svg class='buttonsvg'></svg></button>
+
+            </div>
+
+
+
+            <div class="if-arrow">
+                <div class=flexrow>
+                    <label>width and height</label>
+                </div>
+
+                <div id='form_add_on_width' class='flexrow'>
+                    <label>width</label>
+                    <button class='plus'>+</button>
+                    <input  name=width value='10'/>
+                    <button class='minus'>-</button>
+                </div>
+                <div id='form_add_on_height' class='flexrow'>
+                    <label>height</label>
+                    <button class='plus'>+</button>
+                    <input  name=height value='17'/>
+                    <button class='minus'>-</button>
+                </div>
+
+            </div>
+
+        </div>
+    </fieldset>
+
+
+
+    <fieldset id=fs_graphing class=collapsed  style="display:none">
+        <legend class='leg-4 collapsed'>Graph</legend>
+
+        <div class='fs_toggle' style="display:none">
+
+            <div class=flexrow>
+                <label>ticks x/y </label>
+                <input step=3 value=5 type=number class="form_graph_num_ticks_x">
+                <input step=3 value=5 type=number class="form_graph_num_ticks_y">
+            </div>
+
+
+            <div class=flexrow>
+                <label>min/max x</label><input type=number class="keep-open cm_graph_min_domain">
+                <input type=number class="keep-open cm_graph_max_domain">
+            </div>
+
+
+            <div class=flexrow>
+                <label for=form_fixed_range>set y-axis</label><input type="checkbox" id="form_fixed_range" >
+            </div>
+
+            <div class=flexrow id=form_if_asymptotic style="display:hidden">
+                <label>min/max y</label><input type=number class="keep-open cm_graph_min_range">
+                <input type=number class="keep-open cm_graph_max_range">
+            </div>
+
+
+            <div class=flexrow>
+
+                <div style="width:70%">
+                    <label for=form_graph_crossed_name>Crossed axis</label>
+                    <input id=form_graph_crossed_name class=form_graph_crossed_axis type="checkbox">
+                </div>
+
+                <div style="width:30%">
+                    <label for=form_graph_grid>Grid</label>
+                    <input id=form_graph_grid class="form_graph_grid" type="checkbox">
+                </div>
+            </div>
+
+            <div class=flexrow>
+                <div style="width:77%">
+                    <label>Numbered axes</label>
+                    <input class=form_show_axis_num type=checkbox>
+
+                </div>
+
+                <div style="width:23%">
+                    <button style="width:100%;max-width:100%;" class="form_even_scale single">even scale</button>
+                </div>
+            </div>
+
+            <div class='form_graph_when_line' >
+                <label>Discrete</label>
+                <input class=form_line_discrete type=checkbox>
+            </div>
+
+            <div class=flexrow>
+                <label>add function</label>
+            </div>
+            <div>
+                <textarea  style="width:180px;height:35px;" class="cm_graph_formula_text"></textarea>
+                <button class="cm_graph_formula_add single short">add</button>
+            </div>
+
+
+
+
+        </div>
+
+    </fieldset>
+
+
+
+
+    <fieldset id=fs_board class=collapsed  style="display:none">
+        <legend class='leg-4 collapsed'>Axis Board</legend>
+
+        <div class='fs_toggle' style="display:none">
+
+            <div class=flexrow>
+
+                <div style="width:70%">
+                    <label for=form_graph_crossed_name>Crossed axis</label>
+                    <input id=form_graph_crossed_name class=form_graph_crossed_axis type="checkbox">
+                </div>
+
+                <div style="width:30%">
+                    <label for=form_graph_grid>Grid</label>
+                    <input id=form_graph_grid class="form_graph_grid" type="checkbox">
+                </div>
+            </div>
+
+            <div class=flexrow>
+                <label for=form_show_axis_num>show axis numbers</label>
+                <input class=form_show_axis_num type=checkbox>
+            </div>
+
+
+
+            <div class=flexrow>
+                <label>ticks x/y </label>
+                <input step=3 value=5 type=number class="form_graph_num_ticks_x">
+                <input step=3 value=5 type=number class="form_graph_num_ticks_y">
+            </div>
+
+
+
+            <div id=form_domain_and_ranges>
+                <div class=flexrow>
+                    <label>min/max x</label>
+                    <input type=number class="keep-open cm_graph_min_domain">
+                    <input type=number class="keep-open cm_graph_max_domain">
+                </div>
+
+
+                <div class=flexrow id=form_if_asymptotic style="display:hidden">
+                    <label>min/max y</label>
+                    <input type=number class="keep-open cm_graph_min_range">
+                    <input type=number class="keep-open cm_graph_max_range">
+                </div>
+            </div>
+
+
+
+            <div class="form_fix_position flexrow spacy">
+                <label>toggle draggable</label>
+                <div class='toggle-button'>
+                    <button></button>
+                </div>
+            </div>
+
+
+
+        </div>
+    </fieldset>
+
+
+
+
+
+    <fieldset id='fs_path_advanced' class=collapsed  style="display:none">
+        <legend class='leg-4 collapsed'>Path Advanced Controls</legend>
+        <div class='fs_toggle' style="display:none">
+
+
+
+            <div >
+                <div class=flexrow id= >
+                    <label>show/hide control points</label>
+                    <button class='single short small'  id=form_path_toggle_cps></button>
+                </div>
+                <div class=flexrow >
+                    <label>add control point</label>
+                    <button class='single short small' id=form_path_add_control_point></button>
+                </div>
+            </div>
+
+
+            <div id=form_path_custom_flow >
+                <div class=flexrow>
+                    <label>straighten points</label>
+                    <button id=form_path_straighten_cps  class="single short small" ></button>
+                </div>
+
+                </div>
+
+        </div>
+    </fieldset>
+
+
+
+    <fieldset id='fs_grouping' class=collapsed  style="display:none">
+        <legend class='leg-3 collapsed'>Merge Shapes</legend>
+        <div class='fs_toggle' style="display:none">
+            <div class=flexrow>
+                <label>Merge all covered elements</label>
+                <button class='form_group_cov single small'>x</button>
+            </div>
+            <!-- <div class=flexrow>
+                <label>Merge by dragging</label>
+                <button id=form_drag_merge class='single small'>x</button>
+            </div> -->
+            <div class='flexrow'>
+                <label>Unmerge all children</label>
+                <button class='form_ungroup_all_children single small'>x</button>
+            </div>
+            <!-- <div class='flexrow'>
+                <label>ignore grouped</label>
+                <input type=checkbox id="form_merge_ignore_merged">
+            </div> -->
+            <div class='flexrow'>
+                <label>Undo merge</label>
+                <button id='form_ungroup' class='single small'>x</button>
+            </div>
+
+
+        </div>
+    </fieldset>
+
+
+
+    <fieldset id=fs_import class=collapsed  style="display:none">
+        <legend class='leg-3 collapsed'>Import</legend>
+
+        <div class='fs_toggle' style="display:none">
+
+            <div class=flexrow>
+                <label>force HTML to text</label>
+                <input id=form_import_force_plain_text checked type="checkbox">
+            </div>
+
+            <div class='submenus flexrow'>
+                <h4 class=active> seperators</h4>
+                <!-- <h4> placement</h4>     -->
+            </div>
+
+
+            <div class=sub>
+                <div  class=flexrow>
+                    <label>new shape when</label>
+                    <input value = '' id=form_import_seperator_primary type="text">
+                </div>
+                <div class=flexrow>
+                    <label>new paragraph when</label>
+                    <input value = '\n' id=form_import_seperator type="text">
+                </div>
+
+            </div>
+
+
+
+
+        </div>
+    </fieldset>
+
+
+
+
+
+
+    <fieldset id=fs_drawing class="paid collapsed">
+        <legend class='leg-5 collapsed'  >Drawing   <button id=form_stroke_del class=hidden>del1</button>  <button id=form_draw_recog_del class=hidden>del2</button>  </legend>
+        <div class='fs_toggle' style="display:none">
+            <div id=form_toggle_draw class='flexrow spacy'>
+                <i class="fa fa-pencil-square-o fa-3x"></i>
+                <label>draw mode</label>
+                <div class='toggle-button'>
+                    <button></button>
+                </div>
+            </div>
+
+
+
+            <div class='form_pencil_size flexrow'>
+                <label>pencil size</label>
+                <button class='onoff-left' value=10>XL</button>
+                <button class='onoff-mid' value=5>L</button>
+                <button class='onoff-mid onoff-on' value=2>R</button>
+                <button class='onoff-mid' value=1>S</button>
+                <button class='onoff-right' value=0.5>XS</button>
+            </div>
+
+
+        </div>
+    </fieldset>
+
+
+
+
+
+    <fieldset id=fs_help class="last collapsed">
+        <legend class="leg-5 collapsed"  >Help</legend>
+        <div class='fs_toggle' style="display:none">
+        </div>
+    </fieldset>
+
+</div>
+
+
+                </div>
+
+                <div id=menu_positioning>
+                    <i id=form_menu_up class="fa fa-caret-up fa-2x" title="menu up"></i>
+                    <i id=form_menu_down class="fa fa-caret-down fa-2x" title="menu down"></i>
+                    <i id=form_menu_hide class="fa fa-caret-right fa-2x" title="hide menu"></i>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+    <nav id="context-menu" class=toolbar1 >
+
+    <div id=cm_closer>x</div>
+
+    <div id="cm-addon" class=cm-sub>
+
+        <div style="clear:right" id='cm_add_on_width' class='flexrow '>
+            <label>width</label>
+            <button class='plus keep-open'>+</button>
+            <input  class='keep-open' name=width value='10'/>
+            <button class='minus keep-open'>-</button>
+        </div>
+        <div id='cm_add_on_height' class='flexrow keep-open'>
+        <label>height</label>
+            <button class='plus keep-open'>+</button>
+            <input class='keep-open' name=height value='17'/>
+            <button class='minus keep-open'>-</button>
+        </div>
+
+    </div>
+
+    <div id="cm-math-shape" class=cm-sub>
+        <div id='cm_math_scale' class='flexrow keep-open'>
+            <label>scale (%)</label>
+            <button class='plus keep-open'>+</button>
+            <input class='keep-open' name=height value='17'/>
+            <button class='minus keep-open'>-</button>
+        </div>
+    </div>
+
+    <div id="cm-path" class=cm-sub>
+
+        <div id='form_path_style' class='flexrow'  style="flex-wrap:wrap;justify-content: flex-end">
+            <label>Flow</label>
+            <button class=svg_holder><svg class='buttonsvg'></svg></button>
+            <button class=svg_holder><svg class='buttonsvg'></svg></button>
+            <button class=svg_holder><svg class='buttonsvg'></svg></button>
+            <button class=svg_holder><svg class='buttonsvg'></svg></button>
+
+            <button class=svg_holder><svg class='buttonsvg'></svg></button>
+            <button class=svg_holder><svg class='buttonsvg'></svg></button>
+            <button class=svg_holder><svg class='buttonsvg'></svg></button>
+            <button class=svg_holder><svg class='buttonsvg'></svg></button>
+        </div>
+        <div class='form_path_style2 flexrow'>
+            <label>Style</label>
+            <select class=keep-open style="width:105px;">
+                <option value=plain>plain</option>
+                <option value=double>double</option>
+            </select>
+        </div>
+
+
+
+        <div class=flexrow >
+            <button class='copy_styles single short narrow'>copy style</button>
+            <button class='single no-hg short narrow' id=cm-path-detach >Detach</button>
+            <button class='form_path_reset single short narrow'>Reset</button>
+        </div>
+
+        <div class='form_path_end_fig flexrow'>
+            <label>head <i style="color:red;"  class="fa fa-angle-up"></i> </label>
+            <button class='svg_holder keep-open' side=head><svg class='buttonsvg'></svg></button>
+            <button class='svg_holder keep-open' side=head><svg class='buttonsvg'></svg></button>
+            <button class='svg_holder keep-open' side=head><svg class='buttonsvg'></svg></button>
+        </div>
+
+        <div class='form_path_end_fig flexrow'>
+            <label>tail <i style="color:red;font-weight:400;" class="fa fa-circle"></i> </label>
+            <button class='svg_holder keep-open' side=tail><svg class='buttonsvg'></svg></button>
+            <button class='svg_holder keep-open' side=tail><svg class='buttonsvg'></svg></button>
+            <button class='svg_holder keep-open' side=tail><svg class='buttonsvg'></svg></button>
+        </div>
+
+
+
+        <div >
+            <label style="width:70px;">direction</label>
+            <div style="display:block; height:70px;margin-left:120px" >
+                <div id=cm-path-directions-from class=path_direction_tail style="position:absolute"></div>
+                <div id=cm-path-directions-to class=path_direction_head style="position:absolute"></div>
+            </div>
+        </div>
+        <!-- <div class='form_path_reset flexrow'>
+            <button class='form_path_reset single'>Reset</button>
+        </div> -->
+
+    </div>
+
+
+    <div id="cm-fig" class=cm-sub>
+        <div class='flexrow'>
+            <label>Font</label>
+
+            <div class=keep-open id=cm_fonts_list>
+
+            </div>
+        </div>
+
+        <div class='form_font_class flexrow'>
+            <label>Font size</label>
+            <button class='onoff-left font1_holder'>XL</button>
+            <button class='onoff-mid font2_holder'>L</button>
+            <button class='onoff-mid font3_holder'>R</button>
+            <button class='onoff-mid font4_holder'>S</button>
+            <button class='onoff-right font5_holder'>XS</button>
+        </div>
+
+
+        <div class='flexrow'>
+            <label>Text align</label>
+            <button class='text_align_left onoff-left' ><i class='fa fa-align-left '></i></button>
+            <button class='text_align_center onoff-mid'><i class='fa fa-align-center '></i></button>
+            <button class='text_align_right onoff-right'><i class='fa fa-align-right '></i></button>
+        </div>
+
+        <div class=flexrow>
+            <label>copy</label>
+            <button class='form_copy single short narrow'>shape</button>
+            <button class='copy_styles single short narrow'>style</button>
+        </div>
+
+        <!-- <div class=flexrow>
+            <label>move shape</label>
+            <button class='form_to_top single short narrow'>top</button>
+            <button class='form_cov_to_top single short narrow'>bottom</button>
+        </div> -->
+        <div class=flexrow>
+            <label>even out paragraphs</label>
+            <button class='form_even_out_pars single short small'></button>
+        </div>
+
+        <div class=flexrow>
+            <label>merge covered shapes</label>
+            <button class='form_group_cov single short small'></button>
+        </div>
+
+
+        <div class="form_fig_has_path flexrow">
+            <label>paths</label>
+            <button class='form_disp_go single short narrow'>disperse</button>
+            <button class='form_no_disp single short narrow'>same</button>
+        </div>
+
+        <div id=cm-fig-menu-addon-pp class=flexrow  >
+            <button class='cm_button_toggle_poly_point single' >Toggle points</button>
+            <button class='cm_button_add_point single' >Add point</button>
+
+        </div>
+
+        <div id=cm-fig-menu-addon-pb class=flexrow  >
+            <button class='cm-show-path-basic-points'>show points</button>
+        </div>
+
+
+    </div>
+
+
+    <div id="cm-text-field" class=cm-sub>
+        <textarea type="text" class="keep-open text_input"></textarea>
+        <button id=form_text_field_break class='single short'>Done</button>
+    </div>
+
+    <div id="cm-math-field" class=cm-sub>
+        <textarea type="text" class="keep-open math_input"></textarea>
+        <button id=cm-button-mathjax class='single short'>Done</button>
+    </div>
+
+
+
+
+
+    <div id="cm-text-on-path" class=cm-sub>
+
+        <div class='form_font_class flexrow'>
+            <label>Font size</label>
+            <button class='onoff-left font1_holder'>XL</button>
+            <button class='onoff-mid font2_holder'>L</button>
+            <button class='onoff-mid font3_holder'>R</button>
+            <button class='onoff-mid font4_holder'>S</button>
+            <button class='onoff-right font5_holder'>XS</button>
+        </div>
+
+        <div class='flexrow'>
+            <label>Font</label>
+            <div class=keep-open id=cm_fonts_list_path></div>
+        </div>
+
+        <div class=flexrow>
+            <label>copy styles</label>
+            <button class='copy_styles'>x</button>
+        </div>
+
+    </div>
+
+    <div id="cm-svg" class=cm-sub>
+        <div class='when_group'>
+            <div> <!-- extra div omdat anders door css layout inline flex  flexrows niet onder elkaar getoond worden-->
+
+                <div class=flexrow>
+                    <label>groups</label>
+                </div>
+
+                <div class='flexrow'>
+                    <button class='form_temp_group_to_perm single short'>Store</button>
+                    <button class='form_temp_group_to_perm_deactivate single'>Store & Deactivate</button>
+                    <button class='form_deselect_group single short'>De- activate</button>
+                    <button class='form_reset_group single short'>Reset</button>
+                    <button class='form_paste_group single short'>Paste</button>
+                    <button id=form_align_group class='single short'>align</button>
+                </div>
+
+                <div class='flexrow bordered'>
+                    <label>select nth paragraph in each grouped shape</label>
+                    <input id=form_nth_par class='keep-open' type=number value="1"/>
+                    <button class='form_select_nth_paragraph single'>X</button>
+                </div>
+            </div>
+        </div>
+        <div id=cm_toggle_draw class='flexrow'>
+            <label>draw mode</label>
+            <div class='toggle-button'>
+                <button></button>
+            </div>
+        </div>
+        <div class='form_pencil_size flexrow bordered'>
+            <label>pencil size</label>
+            <button class='onoff-left' value=10>XL</button>
+            <button class='onoff-mid' value=5>L</button>
+            <button class='onoff-mid onoff-on' value=2>R</button>
+            <button class='onoff-mid' value=1>S</button>
+            <button class='onoff-right' value=0.5>XS</button>
+        </div>
+
+
+
+
+    </div>
+
+
+
+    <div id="cm-rect_canvas" class=cm-sub>
+
+
+
+        <div class=flexrow>
+            <label>Merge covered elements</label>
+            <button class='form_group_cov single short'>X</button>
+        </div>
+        <div class=flexrow  id=cm_unmerge>
+            <label>unmerge all children</label>
+            <button class='form_ungroup_all_children single short'>X</button>
+        </div>
+
+        <div class=flexrow>
+            <button class='copy_styles single short'>copy style</button>
+            <button id='cm_fix_position' class='single short'>toggle draggable</button>
+        </div>
+        <div id='cm_scaling' class='plusminus flexrow'>
+            <label>scale</label>
+            <button class='plus keep-open'>+</button>
+            <input/>
+            <button class='minus keep-open'>-</button>
+        </div>
+
+
+    </div>
+
+
+
+
+
+    <!-- SLIDER NIET SLIDE PREVIEW -->
+    <div id="cm-slide" class=cm-sub>
+        <h5>Slide controls</h5>
+        <div  class='flexrow spacy'>
+            <button class="form_make_slide single short">make</button>
+            <button class="form_update_slide single short">update</button>
+            <button class="form_wrap_slide single short">wrap</button>
+            <button class="form_cancel_slide single short">cancel</button>
+            <button class="form_delete_slide single short">delete</button>
+        </div>
+
+
+
+    </div>
+
+    <!-- SLIDE PREVIEW NIET SLIDER -->
+    <div id="cm-slide-preview" class=cm-sub>
+        <h5>Slide preview</h5>
+        <button class="form_toggle_slider single short">show/hide slider</button>
+        <button class="form_delete_slide single short">remove slide</button>
+        <button class="form_slide_exclusion_mode single short ">exclude shapes</button>
+    </div>
+
+    <div id="cm-print-region" class=cm-sub>
+    </div>
+
+    <div id="cm-knot" class=cm-sub>
+       <button id=cm_knot_straigthen>straighten</button>
+    </div>
+
+    <div id="cm-par" class=cm-sub>
+        <div class='flexrow'>
+            <label>Font</label>
+            <div id=cm_fonts_list_par></div>
+        </div>
+
+        <div class='form_font_class flexrow'>
+            <label>Font size</label>
+            <button class='onoff-left font1_holder'>XL</button>
+            <button class='onoff-mid font2_holder'>L</button>
+            <button class='onoff-mid font3_holder'>R</button>
+            <button class='onoff-mid font4_holder'>S</button>
+            <button class='onoff-right font5_holder'>XS</button>
+        </div>
+        <div class='flexrow'>
+            <label>Styling</label>
+            <button class="button_bold onoff-left">Bold</button>
+            <button class="button_italic onoff-mid">Italic</button>
+        </div>
+
+
+        <div class='form_paragraph_prefix flexrow'>
+            <label>Bullets</label>
+            <button class='onoff-left' value=bullet>&#x2022;</button>
+            <button class='onoff-mid' value=triangle>&#x2023;</button>
+            <button class=onoff-mid value=rhombus>&#x2666;</button>
+            <button class=onoff-mid value=check>&#x2713;</button>
+            <button class=onoff-mid value=cross>&#x2717;</button>
+            <button class=onoff-right value=arrow>&#x279e;</button>
+        </div>
+        <div class=flexrow>
+            <label>Other options</label>
+            <button class='copy_styles single'>copy style</button>
+            <button class='single form_par_to_flip_side'>to flip side</button>
+            <button  class='form_paragraph_clear_style single short small'>clear style</button>
+        </div>
+        <div class=flexrow>
+            <label>set to shape width</label>
+            <button class='single short chunk_cover_whole_line'>x </button>
+        </div>
+
+    </div>
+
+    <div id="cm-link" class='cm-sub'>
+        <div id='cm-a-href' class='flexrow'>
+            <label>Link to</label>
+            <textarea class=keep-open type=text></textarea>
+
+        </div>
+        <button>add</button>
+        <button id=cm-button-follow-link>follow</button>
+    </div>
+
+
+    <div id="cm-icon" class='cm-sub'>
+        <div class='form_font_class flexrow'>
+            <label>Font size</label>
+            <button class='onoff-left font1_holder'>XL</button>
+            <button class='onoff-mid font2_holder'>L</button>
+            <button class='onoff-mid font3_holder'>R</button>
+            <button class='onoff-mid font4_holder'>S</button>
+            <button class='onoff-right font5_holder'>XS</button>
+        </div>
+
+    </div>
+
+    <div id='cm-country-basic' class='cm-sub'>
+        <div class=flexrow>
+            <label>show continent</label>
+            <button id=form_show_continent class=single></button>
+        </div>
+        <div class=flexrow>
+            <label>show country</label>
+            <button id=form_show_name class=single></button>
+        </div>
+        <div class=flexrow>
+            <label>solve piece</label>
+            <button id=form_show_position class=single></button>
+        </div>
+
+        <!-- <div class=flexrow>
+            <label>Move</label>
+            <button class='form_to_top single'>to top</button>
+            <button class='form_cov_to_top single'>to bottom</button>
+        </div> -->
+        <button id=cm_zoom_button_country_basic> <i class='fa fa-search-plus fa-2x'></i> </button>
+    </div>
+
+
+    <div id=cm-table>
+        <div class=flexrow>
+            <label>equal width each column  </label>
+            <button id=cm_align_equal_width_each_col> x </button>
+        </div>
+        <div class=flexrow>
+            <label>equal height each row  </label>
+            <button id=cm_align_equal_height_each_row> x </button>
+        </div>
+
+        <div class=flexrow>
+            <label>equal width current column  </label>
+            <button id=cm_align_equal_width_current_col> x </button>
+        </div>
+        <div class=flexrow>
+            <label>equal height current row  </label>
+            <button id=cm_align_equal_height_current_row> x </button>
+        </div>
+
+        <div id='cm_align_x_delta' class='plusminus flexrow keep-open'>
+            <label>set margin between columns</label>
+            <button class='plus keep-open'>+</button>
+            <input value="10"/>
+            <button class='minus keep-open'>-</button>
+        </div>
+
+        <div id='cm_align_y_delta' class='plusminus flexrow keep-open'>
+            <label>set margin between rows</label>
+            <button class='plus keep-open'>+</button>
+            <input value="10"/>
+            <button class='minus keep-open'>-</button>
+        </div>
+
+
+
+
+    </div>
+
+
+
+    <div id=cm-path-basic-without-fo>
+        <button id='cm-show-drawing-points' class='single short'>show points</button>
+        <!--
+        <button class='cm_button_add_point single' >Add point</button>
+
+        <div class=flexrow>
+            <label>make text container</label>
+            <button id=cm_path_basic_add_fo class='single short' >x</button>
+        </div> -->
+        <!-- <div class=flexrow>
+            <label>add arrow</label>
+            <button class="single short" id=cm_path_basic_add_arrow_head>head</button>
+            <button class="single short" id=cm_path_basic_add_arrow_tail>tail</button>
+        </div> -->
+
+    </div>
+
+
+    <div id=cm-graph>
+        <div class=flexrow>
+            <label>min x</label><input type=number class="keep-open cm_graph_min_domain">
+            <label>max x</label><input type=number class="keep-open cm_graph_max_domain">
+        </div>
+        <div class=flexrow>
+            <div style="width:70%">
+                <label for=cm_graph_crossed_name>Crossed axis</label>
+                <input id=cm_graph_crossed_name class=form_graph_crossed_axis type="checkbox">
+            </div>
+            <div style="width:30%">
+                <label for=cm_graph_grid>Grid</label>
+                <input id=cm_graph_grid class="form_graph_grid" type="checkbox">
+            </div>
+        </div>
+        <div >
+            <label>add function</label>
+            <textarea  class="cm_graph_formula_text keep-open"></textarea>
+            <button class="cm_graph_formula_add single short" >add func</button>
+        </div>
+    </div>
+
+    <div id=cm-board>
+        <!-- <div class="form_fix_position flexrow spacy">
+            <label>toggle draggable</label>
+            <div class='toggle-button'>
+                <button></button>
+            </div>
+        </div>    -->
+        <button class=form_fix_position>toggle draggable</button>
+
+
+    </div>
+
+    <div id=cm-empty>
+    </div>
+
+    <div id=cm-predef-styles >
+
+        <div class='flexrow'>
+            <label>Font</label>
+            <select id=predef_font_list class='keep-open' name='font'></select>
+        </div>
+        <div id=predef_font_sizes class='flexrow'>
+            <label>Font size</label>
+            <button class='keep-open onoff-left predef_font1_holder'>XL</button>
+            <button class='keep-open onoff-mid predef_font2_holder'>L</button>
+            <button class='keep-open onoff-mid predef_font3_holder'>R</button>
+            <button class='keep-open onoff-mid predef_font4_holder'>S</button>
+            <button class='keep-open onoff-right predef_font5_holder'>XS</button>
+        </div>
+        <div id=predef_text_align class='flexrow'>
+            <label>Text align</label>
+            <button class='keep-open predef_text_align_left onoff-left' ><i class='fa fa-align-left '></i></button>
+            <button class='keep-open predef_text_align_center onoff-mid'><i class='fa fa-align-center '></i></button>
+            <button class='keep-open predef_text_align_right onoff-right'><i class='fa fa-align-right '></i></button>
+        </div>
+        <div id='predef_fig_line_height' class='flexrow'>
+            <label>Line height</label>
+            <button class='plus keep-open'>+</button>
+            <input class='keep-open' value='1'/>
+            <button class='minus keep-open'>-</button>
+        </div>
+        <div id='predef_border_width' class='plusminus flexrow'>
+            <label>Border width</label>
+            <button class='plus keep-open'>+</button>
+            <input class='keep-open' />
+            <button class='minus keep-open'>-</button>
+        </div>
+        <div id='predef_article_padding' class='plusminus flexrow'>
+            <label>Padding</label>
+            <button class='plus keep-open'>+</button>
+            <input class='keep-open' />
+            <button class='minus keep-open'>-</button>
+        </div>
+
+        <!-- <button id=predef_update_existing>update existing</button> -->
+
+    </div>
+
+    <div id=cm-delete>
+        <div class=flexrow>
+            <div id='cm_border_width' class='plusminus flexrow'>
+                <label>Width</label>
+                <button class='plus keep-open'>+</button>
+                <input style="width:20%;"class='keep-open'/>
+                <button class='minus keep-open'>-</button>
+            </div>
+        </div>
+        <!-- <button id=cm_help_button class=single style='float:right;' ><i class='fa fa-question-circle fa-2x'></i></button> -->
+        <button id=cm_delete_button class=single style='float:right;' ><i class='fa fa-trash fa-2x'></i></button>
+        <button id=cm_zoom_button class=single style='float:right;'><i class='fa fa-search-plus fa-2x'></i></button>
+
+    </div>
+
+    <div id=cm-colors>
+        <svg id=cm_colors_svg></svg>
+    </div>
+</nav>
+
+
+
+
+
+
+<div id="icon_modal" class="modal" lan=en>
+    <div class="modal_content card-4 animate-zoom">
+
+        <span class=close_modal> × </span>
+        <h2 class="tablink">Icon categories</h2>
+
+        <div>
+            <div id=fa_categories></div>
+            <div id=fa_show_icons></div>
+        </div>
+        <p style="font-size:22px;text-align:center;">Double click icon to select</p>
+
+     </div>
+</div>
+
+
+<div id='save_load_modal' class='modal'>
+    <div class="modal_content card-4 animate-zoom">
+        <span class=close_modal> × </span>
+        <h2 id='modal_save' class="tablink">Save Map</h2>
+        <h2 id='modal_load' class="tablink">Load Map</h2>
+
+            <!-- <li><a id='modal_user_art' href="#" class="tablink">Upload jpeg picture</a></li> -->
+            <!--  <li><a id='modal_user_svg' href="#" class="tablink">Upload svg fig</a></li> -->
+            <!-- <li><a id='modal_user_file_to_parse' href="#" class="tablink">Upload file for parsing</a></li> -->
+            <!--    <li><a href="#" class="tablink" onclick="open_tab(event, 'options')">Set options</a></li> -->
+
+        <div id="save" class="modal_tab">
+            <div class=section>
+
+                <div class=clear>
+                    <h3>Choose name for save file</h3>
+                    <div>
+                        <div class=half-left>
+                            <input type='text' id='save_name' />
+                        </div>
+                        <div class=half-right>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class=clear>
+                    <h3>Save to local storage</h3>
+                    <div>
+                        <div class=half-left>
+                            <label>For local storage, press</label>
+                            <button id='savebutton_local' type='button' class=big-button>save local</button>
+                        </div>
+                        <div class=half-right>
+                            <p class=help>
+                                Saving in your local store means saving it in your browsers 'history'. A bit like a cookie. You will be able to access it later via the load option.
+                                IMPORTANT: deleting cookies will also delete your maps in local storage. Saving in local storage is not meant for long term, but usefull when quicksaving
+                                while working on a map.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="dl_vis" class=clear>
+                    <h3>Save by downloading</h3>
+                    <div>
+                        <div class=half-left>
+                            <div>
+                                <label>For download, press </label>
+                                <a id='dl_link'></a>
+                            </div>
+
+                            <div>
+                                <label>zip</label>
+                                <input type=checkbox id="modal_save_zip"/>
+                            </div>
+                        </div>
+
+                        <div class=half-right>
+                            <p class=help>
+                                Downloading will download the file in json format to your download folder. After downloading you can store the downloaded file anyplace you like.
+                                You will be able to load it later via the load menu and continue working with it.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- <div id=modal_github_save_section class=clear>
+                    <h3>Save as Github Gist</h3>
+                    <div>
+                        <div class=half-left>
+                            <label>(optional) description for gist</label>
+                            <input type="text" />
+                            <button> save as gist</button>
+
+                            <div id=modal_gist_edit>
+                                <label>Current gist id</label>
+                                <input  type="text" />
+                                <button id=modal_gist_edit_button class=single>edit existing gist</button>
+                            </div>
+                        </div>
+
+                        <div class=half-right>
+                            <p class=help>
+                                This option will save the map as a gist on github.
+                                This is the easiest way to share your notes / maps. Do mind however that the gist will be saved public. That means your data is not private.
+                            </p>
+                        </div>
+                    </div>
+                </div> -->
+
+            </div>
+
+            <!-- <div class=clear>
+                <h3 >
+                    For downloading your map as a pdf or as an image file, see the Export menu (close current menu, in the menu on the left).
+                </h3>
+            </div> -->
+
+
+
+        </div>
+
+        <div id="load" class="modal_tab">
+
+            <div id=modal_load_tabs>
+                <li><a id=a  class=active>From File</a></li>
+                <li><a id=b  >From local storage</a></li>
+                <!-- <li><a id=c href="#" >From github gist</a></li> -->
+            </div>
+
+
+            <div class="section modal_sub_tab">
+                <h3>Upload file</h3>
+
+                <div class=clear>
+                    <input id='upload' type='file' multiple>
+                </div>
+
+
+
+                <div class=clear id=load_previews_ext></div>
+                <button id=load_ext_map  class=big-button style="display:none">load </button>
+
+            </div>
+
+
+
+
+            <div class="section modal_sub_tab hidden">
+                <h3>Maps in local storage</h3>
+                <div id=load_previews class=clear> </div>
+                <div id=load_preview_buttons class='clear flexrow'>
+                    <button id=load_local_map class=big-button> load </button>
+                    <button id=delete_local_maps class=big-button>delete </button>
+                    <button id=dump_local_maps class=big-button> download all</button>
+                </div>
+
+            </div>
+
+            <!-- <div class="section modal_sub_tab hidden">
+                <h3>Upload map from gist</h3>
+
+                <div class=clear>
+                    <h4>Search user or enter gist id/url</h4>
+                    <div >
+                        <label>user name</label>
+                        <div id=modal_gist_search_for class='toggle-button'>
+                            <button></button>
+                        </div>
+                        <label>gist id / url</label>
+                    </div>
+                    <div class=clear>
+                        <label>search value</label> <input id=gist_search_value placeholder='username or gist id'  type="text" >
+                        <button id=modal_gist_search_button class="big-button">Go fetch</button>
+                    </div>
+                </div>
+                <div id=load_previews_gist></div>
+
+            </div> -->
+
+            <!-- <div class=section >
+                <h3>load options</h3>
+
+
+                <div class=clear>
+                   <label>new map</label>
+                   <div id=new_map_for_load class='toggle-button'>
+                        <button></button>
+                    </div>
+                    <label>load in current</label>
+                    <span style="font-size:8px">"load in current" will not load slides</span>
+                </div>
+            </div> -->
+
+        </div>
+    </div>
+</div>
+
+
+
+<div id=tut_frame style='display:none'>
+	<div id=frame>
+		<div>
+			<button style="display:block" id=close_tut>EXIT</button>
+			<h3>Quick Tutorial</h3>
+			<h5 id=tut_progress>takes about 2 minutes</h5>
+		</div>
+
+		<div>
+			<button id=step_back> < </button>
+			<p id=lesson></p>
+			<button id=step_forward> > </button>
+		</div>
+
+
+	</div>
+</div>
+
+<div id=left_arrow class='anim hor' style="display:none">&#8592;</div>
+<div id=right_arrow class='anim hor' style="display:none">&#8594;</div>
+<div id=up_arrow class='anim vert' style="display:none">&#8593;</div>
+<div id=down_arrow class='anim vert' style="display:none">&#8595;</div>
+<div id=search_form style="display:none">
+    <span id=search_form_close>close</span>
+
+    <p>click result to zoom to it</p>
+
+
+    <!-- <div class=flexrow>
+        <label>fly-over</label>
+        <input id=search_flyover type="checkbox"/>
+    </div> -->
+
+
+    <div id=search_params>
+        <input id=search_form_search_value type="text"/>
+        <button id=search_form_search>search</button>
+    </div>
+
+    <div id=search_results>
+
+
+    </div>
+
+
+</div>
+<div id=help_form style="display:none">
+    <h3 id=help_subject></h3>
+    <div id=help_hook> </div>
+</div>
+
+<script>
+
+
+</script>
+
+<div id=fs_feedback class=fs_abs style='pointer-events: none;display:none;'>
+    <div>
+    </div>
+</div>
+
+<div id=fs_demo_fb class=fs_abs style='display:none;left:600px;'>
+    <div>
+    </div>
+</div>
+
+<div id=fs_temp_button class=fs_abs style='display:none;'>
+    <div >
+    </div>
+    <button id=een></button>
+    <button id=twee></button>
+</div>
+
+<div id=form_slide_update_messages class=fs_abs style='top:5%;display:none;'>
+</div>
+<div id=form_align_update_messages class=fs_abs style='top:5%;display:none;'>
+</div>
+
+<div id=slides_quick_controls style="display:none;">
+    <button class=form_slide_show_prev><i class="fa fa-step-backward"></i></button>
+    <button class=form_slide_show_stop><i class="fa fa-stop"></i></button>
+    <button class=form_slide_show_next><i class="fa fa-step-forward"></i></button>
+    <br>
+    <p></p>
+</div>
+
+<div id='maincontainer'>
+</div>
+
+
+<div id="mobile_text_input" style="display:none;position:absolute">
+    <form>
+        <input type="text" />
+        <!-- <button> x </button> -->
+        <input type="submit" value="x" />
+    </form>
+</div>
+
+<div id="math_modal" style="display:none;position:absolute; top:calc( 100% - 400px );right:220px;">
+
+    <textarea style="width:99%" id=math_modal_input rows="4" cols="50"></textarea>
+    <span id=math_modal_closer >X</span>
+
+    <div style="display:inline-block;">
+        <div>
+            <label for=math_modal_auto_update >auto update</label><input  type=checkbox id=math_modal_auto_update checked>
+            <button style="display:none" id=math_modal_button  type=button >change</button>
+        </div>
+    </div>
+
+</div>
+
+
+<style type="text/css" id=inner>
+    #math_modal_input{
+        font-size:14px;
+        font-family: "Source Code Pro";
+        border: 3px solid #67546b;
+
+    }
+    #math_modal_closer{
+        position: absolute;
+        font-family: "Open Sans";
+        font-size: 20px;
+        top: -17px;
+        right: -12px;
+        margin: 0;
+        padding: 4px;
+        line-height: 15px;
+        border: 2px solid #734b6d;
+        background: #f5f4f4;
+        display: inline-block;
+    }
+
+
+    li.math_menu_header.active{
+        font-weight:bold;
+    }
+
+
+    #math_modal{
+        z-index:10;
+        border: 2px solid #734b6d;
+        border-radius: 4px;
+        padding: 12px;
+
+        background:#f5f4f4;
+        max-width:600px;
+    }
+    #math_modal > .tab{
+        padding: 6px;
+        border: 1px solid #b7b3b6;
+        min-width: 200px;
+        min-height: 100px;
+        display: flex;
+        flex-wrap: wrap;
+        align-content: flex-start;
+        align-items: center;
+        background: white;
+    }
+    #math_modal > .tab.hidden{
+        display:none;
+    }
+    .math_menu_header{
+        margin-left:20px;
+        font-size:16px;
+    }
+    span.MJXc-display{
+        margin:0;
+    }
+    .MathJax_CHTML{
+        font-size:100%!important;
+    }
+    span.mathjax_clickable_item{
+        margin: 4px;
+        padding:2px;
+        /* border: 1px solid grey; */
+
+        background-color:white;
+        transition-duration:1000ms;
+        transition-delay:400ms;
+    }
+    span.mathjax_clickable_item:hover{
+        background-color:rgb(218, 80, 65);
+
+        transition-delay:0ms;
+        /* background-color:#734b6d; */
+    }
+
+
+    #mobile_text_input{
+        z-index:10;
+        position:absolute;
+        top: 40px;
+        right:20px;
+        border: 2px solid #734b6d;
+        border-radius: 4px;
+        padding: 2px;
+        width:10px;
+    }
+    #mobile_text_input input[type="text"]{
+        border-color: rgba(0,0,0,0);
+        width:10px;
+    }
+    #mobile_text_input input[type="submit"]{
+        background-color: rgb(115, 75, 109);
+        width: 23px;
+        height: 22px;
+        border: 1px solid purple;
+        color: white;
+    }
+
+    #context-menu{
+        z-index: 15;
+        position: absolute;
+        display: none;
+        background-color: rgb(220, 220, 220);
+        border: 1px solid black;
+        border-radius: 5px;
+        padding: 4px;
+        width: 220px;
+    }
+    #context-menu .flexrow{
+        margin-bottom: 0px;
+    }
+
+    #context-menu textarea{
+        width: 210px;
+        min-height: 80px;
+        padding: 4px;
+        font-size: 16px;
+    }
+</style>
+
+<script>
+    var gist_data = {};
+    var loaded_data;
+    var zipped = 'False'== 'True';
+    var logged_in = '' == 'True' ||  'False' == 'True';
+    var dataFile = 'rust_canvas';
+    var start_tut  = 'False' == 'True' ;
+    var view_mode = 'False' == 'True' ;
+    var dataPad = '/get_example/rust_canvas/False/'
+    var reloading = 'False' == 'True' ;
+    var service =   '';
+    document.body.scrollTop= 0;
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.3.0/fuse.min.js"></script>
+<script src=static/js/canvas/fit_curve.js></script>
+<script src=static/js/canvas/rough.js></script>
+<script defer src=static/js/canvas/jszip.min.js></script>
+<script src=static/js/canvas/out.min.js?blah=178></script>
+
+
+</body>
+</html>
